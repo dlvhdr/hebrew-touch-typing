@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Exercise } from './HebrewTouchTyping';
-import Letter from './Letter';
+import Letter, { LetterState } from './Letter';
 
 interface ExerciseTextProps {
   exercise: Exercise;
@@ -28,8 +28,20 @@ const ExerciseText: React.FC<ExerciseTextProps> = ({
     [lines, text]
   );
 
+  const getLetterState = useCallback((letter: string, absoluteIndex: number): LetterState => {
+   if (absoluteIndex === userInputText.length) {
+     return LetterState.CURRENT_LETTER;
+   }
+   if (absoluteIndex > userInputText.length) {
+     return LetterState.NOT_REACHED;
+   }
+
+   return userInputText[absoluteIndex] === letter
+      ? LetterState.CORRECT
+      : LetterState.INCORRECT;
+  }, [userInputText]);
+
   return (
-    <div>
       <div className="text">
         {lineIndexes.map(({ start, end }) => (
           <div key={`line_${start}`} className="line" data-testid="line">
@@ -39,20 +51,13 @@ const ExerciseText: React.FC<ExerciseTextProps> = ({
                 <Letter
                   key={absoluteIndex}
                   letter={letter}
-                  state={
-                    absoluteIndex >= userInputText.length
-                      ? 'not-reached'
-                      : userInputText[absoluteIndex] === letter
-                      ? 'correct'
-                      : 'incorrect'
-                  }
+                  state={getLetterState(letter, absoluteIndex)}
                 />
               );
             })}
           </div>
         ))}
       </div>
-    </div>
   );
 };
 

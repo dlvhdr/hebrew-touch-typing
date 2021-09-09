@@ -1,7 +1,8 @@
 import React, { KeyboardEvent, useState } from 'react';
-import './hebrew-touch-typing.scss';
 import ExerciseText from './ExerciseText';
 import { HEBREW_LETTERS } from '../constants/hebrewLetters';
+
+import './hebrew-touch-typing.scss';
 
 export interface Exercise {
   text: string;
@@ -33,6 +34,7 @@ const HebrewTouchTyping = ({
       <p>Text Length: {inputValue.length}</p>
       <input
         data-testid="input"
+        className="input"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyPress={onInputValueChange}

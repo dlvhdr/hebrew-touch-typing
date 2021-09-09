@@ -1,22 +1,37 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useMemo } from 'react';
+
+export enum LetterState {
+  CORRECT = 'correct',
+  INCORRECT = 'incorrect',
+  NOT_REACHED = 'not-reached',
+  CURRENT_LETTER = 'current-letter',
+};
 
 interface LetterProps {
   letter: string;
-  state: 'correct' | 'incorrect' | 'not-reached';
-}
+  state: LetterState;
+};
 
 const Letter: React.FC<LetterProps> = ({ letter, state }: LetterProps) => {
+  const activeClassName = useMemo(() => {
+    switch (state) {
+      case LetterState.CURRENT_LETTER:
+        return 'current-letter';
+      case LetterState.CORRECT:
+        return 'correct-letter';
+      case LetterState.INCORRECT:
+        return 'incorrect-letter';
+      default:
+        return undefined;
+    }
+  }, [state])
   return (
     <span
       data-testid="letter"
       className={classNames(
         'letter',
-        state === 'not-reached'
-          ? undefined
-          : state === 'correct'
-          ? 'correct-letter'
-          : 'incorrect-letter'
+        activeClassName
       )}
     >
       {letter === ' ' ? '\u00A0' : letter}
