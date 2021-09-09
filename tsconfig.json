@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "jsx": "react",
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*", "./jest-setup.ts"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,53 @@
+@import '../../public/css/typography.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  direction: rtl;
+}
+
+h1 {
+  margin-bottom: 24px;
+}
+
+.text {
+  margin-bottom: 40px;
+  font-family: 'Cousine-Regular';
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hebrew-key {
+  display: inline-block;
+  border: 1px solid #818181;
+  line-height: 16px;
+  padding: 12px;
+}
+
+.letter {
+  margin: 1px;
+  border-radius: 2px;
+}
+
+.correct-letter {
+  background: green;
+}
+.incorrect-letter {
+  background: red;
+}
