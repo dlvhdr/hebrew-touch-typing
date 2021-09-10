@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
-import { Exercise } from './HebrewTouchTyping';
+import { ExerciseText } from '../utils/generateLetterExercises';
 import Letter, { LetterState } from './Letter';
 
 interface ExerciseTextProps {
-  exercise: Exercise;
+  exercise: ExerciseText;
   userInputText: string;
 }
 
@@ -12,7 +12,7 @@ interface LineMarker {
   end: number;
 };
 
-const ExerciseText: React.FC<ExerciseTextProps> = ({
+const ExerciseTextBlock: React.FC<ExerciseTextProps> = ({
   exercise,
   userInputText,
 }: ExerciseTextProps) => {
@@ -58,4 +58,4 @@ const ExerciseText: React.FC<ExerciseTextProps> = ({
   );
 };
 
-export default ExerciseText;
+export default ExerciseTextBlock;

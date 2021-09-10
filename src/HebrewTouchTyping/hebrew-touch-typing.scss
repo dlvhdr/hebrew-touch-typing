@@ -96,4 +96,7 @@ h1 {
   margin: 24px 0px;
   font-size: 1em;
   padding: 4px;
+  opacity: 0;
+  position: fixed;
+  left: 50% - calc(50%);
 }
