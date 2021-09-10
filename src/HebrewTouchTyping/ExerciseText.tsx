@@ -7,26 +7,23 @@ interface ExerciseTextProps {
   userInputText: string;
 }
 
+interface LineMarker {
+  start: number;
+  end: number;
+};
+
 const ExerciseText: React.FC<ExerciseTextProps> = ({
   exercise,
   userInputText,
 }: ExerciseTextProps) => {
-  const { lines, text } = exercise;
-  const lineIndexes = useMemo(
-    () => [
-      ...lines.map((line, lineIndex) => {
-        return {
-          start: lineIndex === 0 ? 0 : lines[lineIndex - 1],
-          end: line,
-        };
-      }),
-      {
-        start: lines[lines.length - 1],
-        end: text.length,
-      },
-    ],
-    [lines, text]
-  );
+  const text = exercise.join("");
+  const lineIndexes = exercise.reduce<LineMarker[]>((soFar: LineMarker[], line: string) => {
+    const start = soFar.length === 0 ? 0 : soFar[soFar.length - 1].end;
+    return [...soFar, {
+      start,
+      end: start + line.length,
+    }];
+  }, []);
 
   const getLetterState = useCallback((letter: string, absoluteIndex: number): LetterState => {
    if (absoluteIndex === userInputText.length) {

@@ -7,12 +7,7 @@ export const getDriver = () => {
     when: {
       render: () => {
         render(
-          <HebrewTouchTyping
-            exercise={{
-              text: 'שורה 1 שורה 2',
-              lines: [7],
-            }}
-          />
+          <HebrewTouchTyping exercise={['שורה 1 ', 'שורה 2']} />
         );
       },
       textIsTyped: (text: string) => {

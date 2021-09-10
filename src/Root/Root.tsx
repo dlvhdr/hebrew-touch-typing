@@ -7,10 +7,7 @@ import './root.scss';
 const HebrewTouchTypingPage = (): React.ReactElement => {
   return (
     <HebrewTouchTyping
-      exercise={{
-        text: 'שורה 1 שורה 2',
-        lines: [7],
-      }}
+      exercise={exercise}
     />
   );
 };

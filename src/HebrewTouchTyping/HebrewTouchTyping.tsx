@@ -4,10 +4,7 @@ import { HEBREW_LETTERS } from '../constants/hebrewLetters';
 
 import './hebrew-touch-typing.scss';
 
-export interface Exercise {
-  text: string;
-  lines: number[];
-}
+export type Exercise = string[];
 
 interface HebrewTouchTypingProps {
   exercise: Exercise;
@@ -16,7 +13,7 @@ interface HebrewTouchTypingProps {
 const HebrewTouchTyping = ({
   exercise,
 }: HebrewTouchTypingProps): React.ReactElement => {
-  const { text } = exercise;
+  const text = exercise.join("");
   const [inputValue, setInputValue] = useState('');
   const [textIndex, setTextIndex] = useState(0);
   const onInputValueChange = (e: KeyboardEvent<HTMLInputElement>) => {
