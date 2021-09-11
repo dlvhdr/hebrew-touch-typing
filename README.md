@@ -1,3 +1,3 @@
-# Hebrew Touch Typing
+# ⌨️ Hebrew Touch Typing ⌨️
 
-A website to learn and practice touch typing in Hebrew.
+A website to learn and practice <kbd>touch typing</kbd> in Hebrew 🇮🇱
