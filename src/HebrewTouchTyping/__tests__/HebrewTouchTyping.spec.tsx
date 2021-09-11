@@ -1,7 +1,5 @@
-import * as React from 'react';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import HebrewTouchTyping from '../HebrewTouchTyping';
-import { getDriver } from './HebrewTouchTyping.driver';
+import {cleanup, screen} from '@testing-library/react';
+import {getDriver} from './HebrewTouchTyping.driver';
 
 let driver: ReturnType<typeof getDriver>;
 
@@ -18,12 +16,12 @@ describe('text transform', () => {
     driver.when.render();
 
     const letterElements = screen.getAllByTestId('letter');
-    letterElements.map((letter) => expect(letter).toHaveClass('letter'));
-    letterElements.map((letter) =>
-      expect(letter).not.toHaveClass('correct-letter')
+    letterElements.map(letter => expect(letter).toHaveClass('letter'));
+    letterElements.map(letter =>
+      expect(letter).not.toHaveClass('correct-letter'),
     );
-    letterElements.map((letter) =>
-      expect(letter).not.toHaveClass('incorrect-letter')
+    letterElements.map(letter =>
+      expect(letter).not.toHaveClass('incorrect-letter'),
     );
   });
 
@@ -36,8 +34,8 @@ describe('text transform', () => {
     expect(letterElements[0]).toHaveClass('correct-letter');
     letterElements
       .slice(1)
-      .map((letter) =>
-        expect(letter).not.toHaveClass('correct-letter incorrect-letter')
+      .map(letter =>
+        expect(letter).not.toHaveClass('correct-letter incorrect-letter'),
       );
   });
 
@@ -50,8 +48,8 @@ describe('text transform', () => {
     expect(letterElements[0]).toHaveClass('incorrect-letter');
     letterElements
       .slice(1)
-      .map((letter) =>
-        expect(letter).not.toHaveClass('correct-letter incorrect-letter')
+      .map(letter =>
+        expect(letter).not.toHaveClass('correct-letter incorrect-letter'),
       );
   });
 });

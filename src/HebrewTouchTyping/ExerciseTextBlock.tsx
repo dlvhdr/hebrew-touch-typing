@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
-import { ExerciseText } from '../utils/generateLetterExercises';
-import Letter, { LetterState } from './Letter';
+import React, {useCallback} from 'react';
+import {ExerciseText} from '../utils/generateLetterExercises';
+import Letter, {LetterState} from './Letter';
 
 interface ExerciseTextProps {
   exercise: ExerciseText;
@@ -10,39 +10,50 @@ interface ExerciseTextProps {
 interface LineMarker {
   start: number;
   end: number;
-};
+}
 
 const ExerciseTextBlock: React.FC<ExerciseTextProps> = ({
   exercise,
   userInputText,
 }: ExerciseTextProps) => {
-  const text = exercise.join("");
-  const lineIndexes = exercise.reduce<LineMarker[]>((soFar: LineMarker[], line: string) => {
-    const start = soFar.length === 0 ? 0 : soFar[soFar.length - 1].end;
-    return [...soFar, {
-      start,
-      end: start + line.length,
-    }];
-  }, []);
+  const text = exercise.join('');
+  const lineIndexes = exercise.reduce<LineMarker[]>(
+    (soFar: LineMarker[], line: string) => {
+      const start = soFar.length === 0 ? 0 : soFar[soFar.length - 1].end;
+      return [
+        ...soFar,
+        {
+          start,
+          end: start + line.length,
+        },
+      ];
+    },
+    [],
+  );
 
-  const getLetterState = useCallback((letter: string, absoluteIndex: number): LetterState => {
-   if (absoluteIndex === userInputText.length) {
-     return LetterState.CURRENT_LETTER;
-   }
-   if (absoluteIndex > userInputText.length) {
-     return LetterState.NOT_REACHED;
-   }
+  const getLetterState = useCallback(
+    (letter: string, absoluteIndex: number): LetterState => {
+      if (absoluteIndex === userInputText.length) {
+        return LetterState.CURRENT_LETTER;
+      }
+      if (absoluteIndex > userInputText.length) {
+        return LetterState.NOT_REACHED;
+      }
 
-   return userInputText[absoluteIndex] === letter
-      ? LetterState.CORRECT
-      : LetterState.INCORRECT;
-  }, [userInputText]);
+      return userInputText[absoluteIndex] === letter
+        ? LetterState.CORRECT
+        : LetterState.INCORRECT;
+    },
+    [userInputText],
+  );
 
   return (
-      <div className="text">
-        {lineIndexes.map(({ start, end }) => (
-          <div key={`line_${start}`} className="line" data-testid="line">
-            {Array.from(text).slice(start, end).map((letter, i) => {
+    <div className="text">
+      {lineIndexes.map(({start, end}) => (
+        <div key={`line_${start}`} className="line" data-testid="line">
+          {Array.from(text)
+            .slice(start, end)
+            .map((letter, i) => {
               const absoluteIndex = i + start;
               return (
                 <Letter
@@ -52,9 +63,9 @@ const ExerciseTextBlock: React.FC<ExerciseTextProps> = ({
                 />
               );
             })}
-          </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

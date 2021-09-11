@@ -1,19 +1,19 @@
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 
 export enum LetterState {
   CORRECT = 'correct',
   INCORRECT = 'incorrect',
   NOT_REACHED = 'not-reached',
   CURRENT_LETTER = 'current-letter',
-};
+}
 
 interface LetterProps {
   letter: string;
   state: LetterState;
-};
+}
 
-const Letter: React.FC<LetterProps> = ({ letter, state }: LetterProps) => {
+const Letter: React.FC<LetterProps> = ({letter, state}: LetterProps) => {
   const activeClassName = useMemo(() => {
     switch (state) {
       case LetterState.CURRENT_LETTER:
@@ -25,14 +25,11 @@ const Letter: React.FC<LetterProps> = ({ letter, state }: LetterProps) => {
       default:
         return undefined;
     }
-  }, [state])
+  }, [state]);
   return (
     <span
       data-testid="letter"
-      className={classNames(
-        'letter',
-        activeClassName
-      )}
+      className={classNames('letter', activeClassName)}
     >
       {letter === ' ' ? '\u00A0' : letter}
     </span>

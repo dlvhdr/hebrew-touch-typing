@@ -1,5 +1,5 @@
-import React, { KeyboardEvent, useRef, useState } from 'react';
-import { ExerciseText } from '../utils/generateLetterExercises';
+import React, {KeyboardEvent, useRef, useState} from 'react';
+import {ExerciseText} from '../utils/generateLetterExercises';
 import ExerciseTextBlock from './ExerciseTextBlock';
 
 import './hebrew-touch-typing.scss';
@@ -11,8 +11,8 @@ interface HebrewTouchTypingProps {
 const HebrewTouchTyping = ({
   exercise,
 }: HebrewTouchTypingProps): React.ReactElement => {
-  const text = exercise.join("");
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const text = exercise.join('');
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [inputValue, setInputValue] = useState('');
   const [textIndex, setTextIndex] = useState(0);
   const onInputValueChange = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ const HebrewTouchTyping = ({
       return;
     }
 
-    setTextIndex((index) => index + 1);
+    setTextIndex(index => index + 1);
   };
 
   return (
@@ -34,7 +34,7 @@ const HebrewTouchTyping = ({
         autoFocus={true}
         onBlur={() => inputRef.current?.focus()}
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={e => setInputValue(e.target.value)}
         onKeyPress={onInputValueChange}
       ></input>
       <ExerciseTextBlock exercise={exercise} userInputText={inputValue} />

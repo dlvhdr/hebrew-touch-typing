@@ -1,7 +1,7 @@
-import { getFullListOfPracticeAndReviewExercises } from '../generateLetterExercises';
+import {getFullListOfPracticeAndReviewExercises} from '../generateLetterExercises';
 import {getDriver} from './generateLetterExercises.driver';
-describe("generateLetterExercises", () => {
-  it("should generate a consise text, using only the given two letters, for a review lesson", () => {
+describe('generateLetterExercises', () => {
+  it('should generate a consise text, using only the given two letters, for a review lesson', () => {
     const driver = getDriver();
     driver.given.letters(['ח', 'כ']);
 
@@ -26,13 +26,17 @@ describe("generateLetterExercises", () => {
 
     const exercise = driver.get.letterPracticeExercise(2);
     expect(exercise).toHaveLength(3);
-    expect(driver.get.lettersInExercise(exercise)).toEqual(new Set(['כ', 'ח', 'ג', 'ל', 'ד', 'ך', ' ']));
+    expect(driver.get.lettersInExercise(exercise)).toEqual(
+      new Set(['כ', 'ח', 'ג', 'ל', 'ד', 'ך', ' ']),
+    );
   });
 
   it('should output the full list of exercises - a review and a practice lesson for each 2 new letters', () => {
     const numOfLetterPairs = 15;
     const numOfExerciseTypes = 2;
     const numOfExpectedExercises = numOfLetterPairs * numOfExerciseTypes;
-    expect(getFullListOfPracticeAndReviewExercises()).toHaveLength(numOfExpectedExercises);
+    expect(getFullListOfPracticeAndReviewExercises()).toHaveLength(
+      numOfExpectedExercises,
+    );
   });
-})
+});
