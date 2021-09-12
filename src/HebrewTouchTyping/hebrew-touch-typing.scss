@@ -60,7 +60,7 @@ h1 {
     right: 0;
     bottom: 0px;
     height: 3px;
-    background-color: blue;
+    background-color: #2b2fff;
     border-radius: 2px;
     animation: blink-caret $animation-speed ease-in-out infinite alternate;
   }
@@ -98,4 +98,9 @@ h1 {
   opacity: 0;
   position: fixed;
   left: 50% - calc(50%);
+}
+
+.keyboard-svg {
+  width: 529px;
+  height: 292px;
 }

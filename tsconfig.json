@@ -11,6 +11,6 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "./jest-setup.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*", "./jest-setup.ts", "__mocks__/*"],
+  "exclude": ["node_modules", "dist", "public"]
 }

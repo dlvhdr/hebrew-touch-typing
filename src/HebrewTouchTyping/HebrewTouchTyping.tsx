@@ -1,6 +1,7 @@
 import React, {KeyboardEvent, useRef, useState} from 'react';
 import {ExerciseText} from '../utils/generateLetterExercises';
 import ExerciseTextBlock from './ExerciseTextBlock';
+import KeyboardSvg from './keyboard-svg.svg';
 
 import './hebrew-touch-typing.scss';
 
@@ -38,6 +39,14 @@ const HebrewTouchTyping = ({
         onKeyPress={onInputValueChange}
       ></input>
       <ExerciseTextBlock exercise={exercise} userInputText={inputValue} />
+      <object
+        id="keyboard-svg"
+        className="keyboard-svg"
+        type="image/svg+xml"
+        data={KeyboardSvg}
+      >
+        Keyboard SVG
+      </object>
     </div>
   );
 };

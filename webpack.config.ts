@@ -52,7 +52,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
         type: 'asset/resource',
         generator: {
           filename: 'fonts/[hash][ext][query]',
@@ -61,6 +61,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.scss', '.ttf'],
+    extensions: ['.tsx', '.ts', '.js', '.scss', '.ttf', '.svg'],
   },
 };
