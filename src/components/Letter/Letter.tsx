@@ -19,11 +19,11 @@ const Letter: React.FC<LetterProps> = ({letter, state}: LetterProps) => {
   const activeClassName = useMemo(() => {
     switch (state) {
       case LetterState.CURRENT_LETTER:
-        return 'current-letter';
+        return 'currentLetter';
       case LetterState.CORRECT:
-        return 'correct-letter';
+        return 'correctLetter';
       case LetterState.INCORRECT:
-        return 'incorrect-letter';
+        return 'incorrectLetter';
       default:
         return undefined;
     }

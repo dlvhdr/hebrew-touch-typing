@@ -2,15 +2,18 @@ import React, {KeyboardEvent, useRef, useState} from 'react';
 import {ExerciseText} from '../../utils/generateLetterExercises';
 import ExerciseTextBlock from '../ExerciseTextBlock/ExerciseTextBlock';
 import KeyboardSvg from './keyboard-svg.svg';
+import classNames from 'classnames';
 
 import * as styles from './hebrew-touch-typing.scss';
 
 interface HebrewTouchTypingProps {
   exercise: ExerciseText;
+  className?: string;
 }
 
 const HebrewTouchTyping = ({
   exercise,
+  className,
 }: HebrewTouchTypingProps): React.ReactElement => {
   const text = exercise.join('');
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -25,8 +28,7 @@ const HebrewTouchTyping = ({
   };
 
   return (
-    <div className={styles.root}>
-      <h1>הקלדה עיוורת</h1>
+    <div className={classNames(styles.root, className)}>
       <input
         aria-hidden="true"
         data-testid="input"

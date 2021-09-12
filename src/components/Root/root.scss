@@ -1,0 +1,26 @@
+@import '../../../public/css/typography.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  font-family: 'Arial';
+  font-size: 16px;
+  background: #fafafa;
+  color: #6b705c;
+}
+
+.root {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 200px;
+}
+
+.main-content {
+  flex-grow: 1;
+}
