@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import HebrewTouchTyping from '../HebrewTouchTyping/HebrewTouchTyping';
+import HebrewTouchTyping from '../components/HebrewTouchTyping/HebrewTouchTyping';
 
 import './root.scss';
 import {getFullListOfPracticeAndReviewExercises} from '../utils/generateLetterExercises';

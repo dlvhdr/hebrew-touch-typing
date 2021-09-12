@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  direction: rtl;
+}
+
+h1 {
+  margin-bottom: 24px;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hebrew-key {
+  display: inline-block;
+  border: 1px solid #818181;
+  line-height: 16px;
+  padding: 12px;
+}
+
+.input {
+  margin: 24px 0px;
+  font-size: 1em;
+  padding: 4px;
+  opacity: 0;
+  position: fixed;
+  left: 50% - calc(50%);
+}
+
+.keyboard-svg {
+  width: 529px;
+  height: 292px;
+}

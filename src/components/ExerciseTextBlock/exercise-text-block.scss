@@ -1,0 +1,14 @@
+.text {
+  font-size: 1.6em;
+  margin-bottom: 40px;
+  font-family: 'Cousine-Regular';
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+}

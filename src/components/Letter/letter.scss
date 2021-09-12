@@ -1,44 +1,3 @@
-.root {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: right;
-  direction: rtl;
-}
-
-h1 {
-  margin-bottom: 24px;
-}
-
-.text {
-  font-size: 1.6em;
-  margin-bottom: 40px;
-  font-family: 'Cousine-Regular';
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.line {
-  display: flex;
-  flex-direction: row;
-  gap: 1px;
-}
-
-.keyboard {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.hebrew-key {
-  display: inline-block;
-  border: 1px solid #818181;
-  line-height: 16px;
-  padding: 12px;
-}
-
 .letter {
   margin: 0.5px;
   border-radius: 2px;
@@ -87,20 +46,7 @@ h1 {
 .correct-letter {
   background: #22fa95d3;
 }
+
 .incorrect-letter {
   background: #ff6e63d3;
-}
-
-.input {
-  margin: 24px 0px;
-  font-size: 1em;
-  padding: 4px;
-  opacity: 0;
-  position: fixed;
-  left: 50% - calc(50%);
-}
-
-.keyboard-svg {
-  width: 529px;
-  height: 292px;
 }

@@ -1,9 +1,9 @@
 import React, {KeyboardEvent, useRef, useState} from 'react';
-import {ExerciseText} from '../utils/generateLetterExercises';
-import ExerciseTextBlock from './ExerciseTextBlock';
+import {ExerciseText} from '../../utils/generateLetterExercises';
+import ExerciseTextBlock from '../ExerciseTextBlock/ExerciseTextBlock';
 import KeyboardSvg from './keyboard-svg.svg';
 
-import './hebrew-touch-typing.scss';
+import * as styles from './hebrew-touch-typing.scss';
 
 interface HebrewTouchTypingProps {
   exercise: ExerciseText;
@@ -25,12 +25,12 @@ const HebrewTouchTyping = ({
   };
 
   return (
-    <div className="root">
+    <div className={styles.root}>
       <h1>הקלדה עיוורת</h1>
       <input
         aria-hidden="true"
         data-testid="input"
-        className="input"
+        className={styles.input}
         ref={inputRef}
         autoFocus={true}
         onBlur={() => inputRef.current?.focus()}
@@ -41,7 +41,7 @@ const HebrewTouchTyping = ({
       <ExerciseTextBlock exercise={exercise} userInputText={inputValue} />
       <object
         id="keyboard-svg"
-        className="keyboard-svg"
+        className={styles.keyboardSvg}
         type="image/svg+xml"
         data={KeyboardSvg}
       >

@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React, {useMemo} from 'react';
 
+import * as styles from './letter.scss';
+
 export enum LetterState {
   CORRECT = 'correct',
   INCORRECT = 'incorrect',
@@ -29,7 +31,10 @@ const Letter: React.FC<LetterProps> = ({letter, state}: LetterProps) => {
   return (
     <span
       data-testid="letter"
-      className={classNames('letter', activeClassName)}
+      className={classNames(
+        styles.letter,
+        activeClassName && styles[activeClassName],
+      )}
     >
       {letter === ' ' ? '\u00A0' : letter}
     </span>

@@ -1,6 +1,8 @@
 import React, {useCallback} from 'react';
-import {ExerciseText} from '../utils/generateLetterExercises';
-import Letter, {LetterState} from './Letter';
+import {ExerciseText} from '../../utils/generateLetterExercises';
+import Letter, {LetterState} from '../Letter/Letter';
+
+import * as styles from './exercise-text-block.scss';
 
 interface ExerciseTextProps {
   exercise: ExerciseText;
@@ -48,9 +50,9 @@ const ExerciseTextBlock: React.FC<ExerciseTextProps> = ({
   );
 
   return (
-    <div className="text">
+    <div className={styles.text}>
       {lineIndexes.map(({start, end}) => (
-        <div key={`line_${start}`} className="line" data-testid="line">
+        <div key={`line_${start}`} className={styles.line} data-testid="line">
           {Array.from(text)
             .slice(start, end)
             .map((letter, i) => {
