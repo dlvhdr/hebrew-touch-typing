@@ -1,0 +1,19 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 11px;
+  background: #f2f2f2;
+  border: 1px solid #e2e2e2;
+  border-radius: 2px;
+  font-size: 1.3em;
+  box-shadow: inset 0px -1px 0 0px #cacaca, inset 0px -2px 0 0px #dcdcdc;
+  vertical-align: middle;
+}
+
+.letter {
+  font-family: 'Cousine-Regular';
+  position: relative;
+  top: 1px;
+}

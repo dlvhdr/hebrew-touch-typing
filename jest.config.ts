@@ -8,6 +8,7 @@ const config: Config.InitialOptions = {
   testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   moduleNameMapper: {
     '\\.scss$': '<rootDir>/__mocks__/styleMock.ts',
+    '\\.svg$': '<rootDir>/__mocks__/svgMock.ts',
   },
 };
 

@@ -28,9 +28,10 @@ const Letter: React.FC<LetterProps> = ({letter, state}: LetterProps) => {
         return undefined;
     }
   }, [state]);
+
   return (
     <span
-      data-testid="letter"
+      data-testid={activeClassName ?? 'letter'}
       className={classNames(
         styles.letter,
         activeClassName && styles[activeClassName],

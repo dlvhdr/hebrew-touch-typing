@@ -1,0 +1,42 @@
+.root {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+}
+
+.exercise-number-pill {
+  background: #94dade;
+  font-size: 14px;
+  color: #410b13;
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  grid-row-start: 2;
+  height: 20px;
+  align-self: center;
+  margin-left: 24px;
+  justify-self: flex-end;
+}
+
+.keycaps {
+  grid-row-start: 2;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 12px;
+}
+
+.lesson-type {
+  margin-bottom: 8px;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  padding: 0px 5px;
+  background: #dec8b7;
+  font-size: 0.75em;
+  color: white;
+  height: 15px;
+  width: fit-content;
+}

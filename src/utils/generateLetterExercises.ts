@@ -8,15 +8,28 @@ export type Letter = string;
 export type LessonNewLetters = [Letter, Letter];
 export type ExerciseText = string[];
 
-enum ExerciseType {
+export enum ExerciseType {
   REVIEW = 'review',
   PRACTICE = 'practice',
 }
 
-type Exercise = {
+interface BaseExercise {
+  index: number;
   text: ExerciseText;
   type: ExerciseType;
-};
+}
+
+export interface LettersReviewExercise extends BaseExercise {
+  newLetters: LessonNewLetters;
+  type: ExerciseType.REVIEW;
+}
+
+export interface LettersPracticeExercise extends BaseExercise {
+  newLetters: LessonNewLetters;
+  type: ExerciseType.PRACTICE;
+}
+
+export type LettersExercise = LettersReviewExercise | LettersPracticeExercise;
 
 const generateRandomWordLength = () => {
   return Math.max(2, Math.floor(Math.random() * AVERAGE_WORD_LENGTH + 1));
@@ -60,19 +73,25 @@ export const generateLetterPracticeExercise = (
   return getEmptyLinesArray().map(_line => generateRandomLine(letters));
 };
 
-export const getFullListOfPracticeAndReviewExercises = (): Exercise[] => {
-  return letterLearningOrder
-    .map((newLetters: LessonNewLetters, exerciseNumber: number) => {
-      return [
-        {
-          text: generateLetterReviewExercise(newLetters),
-          type: ExerciseType.REVIEW,
-        },
-        {
-          text: generateLetterPracticeExercise(exerciseNumber),
-          type: ExerciseType.PRACTICE,
-        },
-      ];
-    })
-    .flat();
-};
+export const getFullListOfPracticeAndReviewExercises =
+  (): LettersExercise[] => {
+    return letterLearningOrder
+      .map((newLetters: LessonNewLetters, index: number) => {
+        const exerciseNumber = index * 2;
+        return [
+          {
+            index: exerciseNumber,
+            newLetters,
+            text: generateLetterReviewExercise(newLetters),
+            type: ExerciseType.REVIEW,
+          },
+          {
+            index: exerciseNumber + 1,
+            newLetters,
+            text: generateLetterPracticeExercise(exerciseNumber),
+            type: ExerciseType.PRACTICE,
+          },
+        ];
+      })
+      .flat();
+  };

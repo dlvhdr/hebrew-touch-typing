@@ -15,14 +15,11 @@ describe('text transform', () => {
   it('should display the text without any correct/incorrect classes', () => {
     driver.when.render();
 
-    const letterElements = screen.getAllByTestId('letter');
-    letterElements.map(letter => expect(letter).toHaveClass('letter'));
-    letterElements.map(letter =>
-      expect(letter).not.toHaveClass('correct-letter'),
-    );
-    letterElements.map(letter =>
-      expect(letter).not.toHaveClass('incorrect-letter'),
-    );
+    const letterElements = driver.get.statelessLetters();
+    expect(letterElements).toHaveLength(driver.get.textLength() - 1);
+
+    const currentLetterElement = driver.get.currentLetter();
+    expect(currentLetterElement).toBeDefined();
   });
 
   it('should apply correct letter class when typing a correct letter', () => {
@@ -30,13 +27,14 @@ describe('text transform', () => {
 
     driver.when.textIsTyped('ש');
 
-    const letterElements = screen.getAllByTestId('letter');
-    expect(letterElements[0]).toHaveClass('correct-letter');
-    letterElements
-      .slice(1)
-      .map(letter =>
-        expect(letter).not.toHaveClass('correct-letter incorrect-letter'),
-      );
+    const letterElements = driver.get.statelessLetters();
+    expect(letterElements).toHaveLength(driver.get.textLength() - 2);
+
+    const correctLetterElements = driver.get.correctLetters();
+    expect(correctLetterElements).toHaveLength(1);
+
+    const incorrectLetterElements = driver.get.incorrectLetters();
+    expect(incorrectLetterElements).toHaveLength(0);
   });
 
   it('should apply incorrect letter class when typing a incorrect letter', () => {
@@ -44,12 +42,13 @@ describe('text transform', () => {
 
     driver.when.textIsTyped('ו');
 
-    const letterElements = screen.getAllByTestId('letter');
-    expect(letterElements[0]).toHaveClass('incorrect-letter');
-    letterElements
-      .slice(1)
-      .map(letter =>
-        expect(letter).not.toHaveClass('correct-letter incorrect-letter'),
-      );
+    const letterElements = driver.get.statelessLetters();
+    expect(letterElements).toHaveLength(driver.get.textLength() - 2);
+
+    const correctLetterElements = driver.get.correctLetters();
+    expect(correctLetterElements).toHaveLength(0);
+
+    const incorrectLetterelements = driver.get.incorrectLetters();
+    expect(incorrectLetterelements).toHaveLength(1);
   });
 });
