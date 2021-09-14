@@ -53,7 +53,7 @@ const generateRandomLine = (lettersSet: Letter[]) => {
         .join(''),
     )
     .flat();
-  return randomWords.join(' ');
+  return randomWords.join(' ') + ' ';
 };
 
 const getEmptyLinesArray = (): undefined[] => {

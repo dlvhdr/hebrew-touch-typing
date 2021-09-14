@@ -1,0 +1,65 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 12px;
+  font-family: 'Heebo-Bold';
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+
+  &:hover {
+    background: #f3dece;
+  }
+
+  &:active {
+    background: #efd3bd;
+  }
+}
+
+.exercises {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  overflow-y: auto;
+  padding-right: 28px;
+  margin-right: 12px;
+  max-height: 40vh;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    visibility: hidden;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(255, 209, 173, 0.66);
+    visibility: hidden;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
+}
+
+$expansion-duration: 0.2s;
+
+.collapsed-icon {
+  transform: rotate(90deg);
+  transition: $expansion-duration ease-out;
+}
+
+.expanded-icon {
+  transition: $expansion-duration ease-out;
+}

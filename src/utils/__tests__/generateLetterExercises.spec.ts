@@ -21,6 +21,14 @@ describe('generateLetterExercises', () => {
     expect(exercise).toHaveLength(3);
   });
 
+  it('should output each line with a space at the end', () => {
+    const driver = getDriver();
+    driver.given.letters(['ח', 'כ']);
+
+    const exercise = driver.get.letterReviewExercise();
+    exercise.map(line => expect(line.endsWith(' ')).toBe(true));
+  });
+
   it('should generate a concise text, using the letters learned up until now, for a practice lesson', () => {
     const driver = getDriver();
 

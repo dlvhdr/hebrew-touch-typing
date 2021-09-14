@@ -5,16 +5,11 @@
   background: #ffe8d6;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  overflow-y: auto;
+  align-items: flex-end;
+  overflow: hidden;
 }
 
 h1 {
   font-size: 36px;
-}
-
-.exercises {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  font-family: 'Heebo-Bold';
 }
