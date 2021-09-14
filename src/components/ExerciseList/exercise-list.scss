@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 100%;
 }
 
 .header {
@@ -38,18 +37,9 @@
     height: 8px;
   }
 
-  &::-webkit-scrollbar-track {
-    visibility: hidden;
-  }
-
   &::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgba(255, 209, 173, 0.66);
-    visibility: hidden;
-  }
-
-  &:hover::-webkit-scrollbar-thumb {
-    visibility: visible;
   }
 }
 

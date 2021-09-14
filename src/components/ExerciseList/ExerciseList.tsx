@@ -1,18 +1,27 @@
-import React, {useMemo, useState} from 'react';
-import {getFullListOfPracticeAndReviewExercises} from '../../utils/generateLetterExercises';
+import classNames from 'classnames';
+import React, {useState} from 'react';
+import {LettersExercise} from '../../utils/generateLetterExercises';
 import ExerciseMenuItem from '../ExerciseMenuItem/ExerciseMenuItem';
 import * as styles from './exercise-list.scss';
 import ExpandIcon from './ExpandIcon';
 
-const ExerciseList: React.FC = () => {
+interface ExerciseListProps {
+  exercises: LettersExercise[];
+  title: string;
+  emoji: string;
+  className?: string;
+}
+
+const ExerciseList: React.FC<ExerciseListProps> = ({
+  exercises,
+  title,
+  emoji,
+  className,
+}) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const exercises = useMemo(() => {
-    return getFullListOfPracticeAndReviewExercises();
-  }, []);
-
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, className)}>
       <div
         className={styles.header}
         role="button"
@@ -20,8 +29,8 @@ const ExerciseList: React.FC = () => {
         onClick={() => setIsExpanded(expanded => !expanded)}
       >
         <ExpandIcon isExpanded={isExpanded} />
-        <h3>שיעורי אותיות</h3>
-        <span>⌨️</span>
+        <h3>{title}</h3>
+        <span>{emoji}</span>
       </div>
       {isExpanded ? (
         <div className={styles.exercises}>
