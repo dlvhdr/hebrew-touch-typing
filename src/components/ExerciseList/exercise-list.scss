@@ -1,7 +1,8 @@
 .root {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 2px;
+  width: 100%;
 }
 
 .header {
@@ -11,8 +12,10 @@
   font-family: 'Heebo-Bold';
   padding: 8px 10px;
   border-radius: 4px;
-  cursor: pointer;
   align-items: center;
+  background: transparent;
+  cursor: pointer;
+  border: none;
 
   &:hover {
     background: #f3dece;
@@ -26,10 +29,10 @@
 .exercises {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 4px;
   overflow-y: auto;
   padding-right: 28px;
-  margin-right: 12px;
+  margin-right: 14px;
   max-height: 40vh;
 
   &::-webkit-scrollbar {

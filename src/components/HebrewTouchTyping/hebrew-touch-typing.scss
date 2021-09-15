@@ -1,7 +1,7 @@
 .root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-block: min(10vh, 135px);
   text-align: right;
   direction: rtl;
 }

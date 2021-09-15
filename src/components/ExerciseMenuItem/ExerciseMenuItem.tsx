@@ -1,4 +1,5 @@
-import React from 'react';
+import classNames from 'classnames';
+import React, {useMemo} from 'react';
 import {
   ExerciseType,
   LettersExercise,
@@ -12,13 +13,18 @@ interface ExerciseMenuItemProps {
 }
 
 const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
-  const {setSelectedExercise} = useExerciseContext();
+  const {selectedExercise, setSelectedExercise} = useExerciseContext();
+
+  const isSelected = useMemo(() => {
+    return selectedExercise?.index === exercise.index;
+  }, [selectedExercise]);
 
   return (
-    <div
-      className={styles.root}
+    <button
+      className={classNames(styles.root, {
+        [styles.selectedExercise]: isSelected,
+      })}
       data-testid="exercise-menu-item"
-      role="button"
       onClick={() => setSelectedExercise(exercise)}
     >
       <div className={styles.lessonType}>
@@ -30,7 +36,7 @@ const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
         ))}
       </div>
       <div className={styles.exerciseNumberPill}>{exercise.index + 1}</div>
-    </div>
+    </button>
   );
 };
 

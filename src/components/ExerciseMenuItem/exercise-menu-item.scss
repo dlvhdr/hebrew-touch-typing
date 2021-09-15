@@ -3,6 +3,18 @@
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, auto);
   cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+
+  &:hover:not(.selected-exercise) {
+    background: #f3dece;
+  }
+
+  &:active {
+    background: rgba(235, 200, 173, 1);
+  }
 }
 
 .exercise-number-pill {
@@ -40,4 +52,8 @@
   color: white;
   height: 15px;
   width: fit-content;
+}
+
+.selected-exercise {
+  background: #efd3bd;
 }

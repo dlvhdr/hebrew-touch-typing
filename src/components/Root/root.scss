@@ -11,14 +11,14 @@
 body {
   font-family: 'Heebo-Regular';
   font-size: 16px;
-  background: #fff6ef;
+  background: white;
   color: #410b13;
 }
 
 .root {
   display: flex;
   flex-direction: row-reverse;
-  gap: 200px;
+  gap: min(20vw, 200px);
 }
 
 .main-content {

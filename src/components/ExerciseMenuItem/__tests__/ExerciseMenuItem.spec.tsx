@@ -18,7 +18,6 @@ describe('ExerciseMenuItem', () => {
   it('should render the exercise number', () => {
     renderWithProviders(<ExerciseMenuItem exercise={exercise} />);
 
-    screen.debug();
     expect(screen.getByText(/23/i)).toBeDefined();
   });
 

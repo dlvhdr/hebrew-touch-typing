@@ -22,16 +22,15 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
 
   return (
     <div className={classNames(styles.root, className)}>
-      <div
+      <button
         className={styles.header}
-        role="button"
         aria-label="expand or collapse toggle"
         onClick={() => setIsExpanded(expanded => !expanded)}
       >
         <ExpandIcon isExpanded={isExpanded} />
         <h3>{title}</h3>
         <span>{emoji}</span>
-      </div>
+      </button>
       {isExpanded ? (
         <div className={styles.exercises}>
           {exercises.map(exercise => (
