@@ -1,10 +1,11 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {screen} from '@testing-library/react';
 import ExerciseMenuItem from '../ExerciseMenuItem';
 import {
   ExerciseType,
   LettersExercise,
 } from '../../../utils/generateLetterExercises';
+import {renderWithProviders} from '../../../utils/renderWithProviders';
 
 const exercise: LettersExercise = {
   index: 22,
@@ -15,13 +16,14 @@ const exercise: LettersExercise = {
 
 describe('ExerciseMenuItem', () => {
   it('should render the exercise number', () => {
-    render(<ExerciseMenuItem exercise={exercise} />);
+    renderWithProviders(<ExerciseMenuItem exercise={exercise} />);
 
+    screen.debug();
     expect(screen.getByText(/23/i)).toBeDefined();
   });
 
   it('should render the exercise name', () => {
-    render(<ExerciseMenuItem exercise={exercise} />);
+    renderWithProviders(<ExerciseMenuItem exercise={exercise} />);
 
     expect(screen.getByText(/כ/i)).toBeDefined();
     expect(screen.getByText(/ח/i)).toBeDefined();

@@ -1,11 +1,10 @@
 import React, {useCallback} from 'react';
-import {ExerciseText} from '../../utils/generateLetterExercises';
+import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
 import Letter, {LetterState} from '../Letter/Letter';
 
 import * as styles from './exercise-text-block.scss';
 
 interface ExerciseTextProps {
-  exercise: ExerciseText;
   userInputText: string;
 }
 
@@ -15,11 +14,14 @@ interface LineMarker {
 }
 
 const ExerciseTextBlock: React.FC<ExerciseTextProps> = ({
-  exercise,
   userInputText,
 }: ExerciseTextProps) => {
-  const text = exercise.join('');
-  const lineIndexes = exercise.reduce<LineMarker[]>(
+  const {selectedExercise} = useExerciseContext();
+  if (selectedExercise == null) {
+    return null;
+  }
+  const text = selectedExercise.text.join('');
+  const lineIndexes = selectedExercise.text.reduce<LineMarker[]>(
     (soFar: LineMarker[], line: string) => {
       const start = soFar.length === 0 ? 0 : soFar[soFar.length - 1].end;
       return [

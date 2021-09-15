@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, auto);
+  cursor: pointer;
 }
 
 .exercise-number-pill {

@@ -1,6 +1,11 @@
 import React from 'react';
-import {render, screen, fireEvent} from '@testing-library/react';
+import {screen, fireEvent} from '@testing-library/react';
 import HebrewTouchTyping from '../HebrewTouchTyping';
+import {renderWithProviders} from '../../../utils/renderWithProviders';
+import {
+  ExerciseType,
+  LettersExercise,
+} from '../../../utils/generateLetterExercises';
 
 export type HebrewTouchTypingDriver = {
   when: {
@@ -17,10 +22,18 @@ export type HebrewTouchTypingDriver = {
 };
 export const getDriver = (): HebrewTouchTypingDriver => {
   const text = ['שורה 1 ', 'שורה 2'];
+  const exercise: LettersExercise = {
+    index: 0,
+    type: ExerciseType.REVIEW,
+    text,
+    newLetters: ['1', '2'],
+  };
   return {
     when: {
       render: (): Element => {
-        const {baseElement} = render(<HebrewTouchTyping exercise={text} />);
+        const {baseElement} = renderWithProviders(<HebrewTouchTyping />, {
+          initialExercise: exercise,
+        });
         return baseElement;
       },
       textIsTyped: (text: string) => {
