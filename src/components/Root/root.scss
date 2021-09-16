@@ -17,10 +17,24 @@ body {
 
 .root {
   display: flex;
-  flex-direction: row-reverse;
   gap: min(20vw, 200px);
+  flex-direction: row-reverse;
 }
 
 .main-content {
   flex-grow: 1;
+}
+
+.dlvhdr {
+  font-family: 'Heebo-Bold';
+  position: absolute;
+  left: 61px;
+  top: 40px;
+  outline: none;
+  color: #410b13;
+  text-decoration: none;
+
+  h3 {
+    font-size: 1.125em;
+  }
 }

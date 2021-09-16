@@ -1,10 +1,10 @@
 import React, {KeyboardEvent, useRef, useState} from 'react';
 import ExerciseTextBlock from '../ExerciseTextBlock/ExerciseTextBlock';
 import classNames from 'classnames';
-
 import * as styles from './hebrew-touch-typing.scss';
 import ExerciseTitle from '../ExerciseTitle/ExerciseTitle';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
+import {KeyboardWarriorSvg} from './KeyboardWarriorSvg';
 
 interface HebrewTouchTypingProps {
   className?: string;
@@ -15,7 +15,12 @@ const HebrewTouchTyping = ({
 }: HebrewTouchTypingProps): React.ReactElement | null => {
   const {selectedExercise} = useExerciseContext();
   if (selectedExercise == null) {
-    return null;
+    return (
+      <div className={styles.emptyState}>
+        <h1>האתר ללמוד בו הקדלה עיוורת בעברית</h1>
+        <KeyboardWarriorSvg />
+      </div>
+    );
   }
 
   const text = selectedExercise.text.join('');
@@ -43,7 +48,7 @@ const HebrewTouchTyping = ({
         onChange={e => setInputValue(e.target.value)}
         onKeyPress={onInputValueChange}
       ></input>
-      <ExerciseTitle />
+      <ExerciseTitle className={styles.title} />
       <ExerciseTextBlock userInputText={inputValue} />
       {/* <object
         id="keyboard-svg"

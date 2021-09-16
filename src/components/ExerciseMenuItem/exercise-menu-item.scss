@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: 3fr 1fr;
   grid-template-rows: repeat(2, auto);
   cursor: pointer;
   padding: 8px;

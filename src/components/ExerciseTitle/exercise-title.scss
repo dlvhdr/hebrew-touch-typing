@@ -1,6 +1,24 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+}
+
 .title {
   font-family: 'Heebo-Bold';
   letter-spacing: 2px;
   font-size: 3em;
-  margin-bottom: 90px;
+}
+
+.divider {
+  height: 2.8em;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.new-letters {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
 }

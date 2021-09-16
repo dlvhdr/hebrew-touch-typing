@@ -7,6 +7,9 @@ import * as styles from './root.scss';
 const HebrewTouchTypingPage = (): React.ReactElement => {
   return (
     <div className={styles.root}>
+      <a href="https://dlvhdr.me" className={styles.dlvhdr}>
+        <h3>DLVHDR</h3>
+      </a>
       <ExerciseProvider>
         <SideBar />
         <HebrewTouchTyping className={styles.mainContent} />

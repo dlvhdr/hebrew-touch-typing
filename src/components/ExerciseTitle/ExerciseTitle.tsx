@@ -1,19 +1,30 @@
+import classNames from 'classnames';
 import React from 'react';
 import {ExerciseType} from '../../utils/generateLetterExercises';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
+import LetterKeycap from '../LetterKeycap/LetterKeycap';
 import * as styles from './exercise-title.scss';
 
-const ExerciseTitle = (): JSX.Element | null => {
+interface ExerciseTitleProps {
+  className?: string;
+}
+
+const ExerciseTitle = ({className}: ExerciseTitleProps): JSX.Element | null => {
   const {selectedExercise} = useExerciseContext();
   if (selectedExercise == null) {
     return null;
   }
 
   return (
-    <div>
+    <div className={classNames(styles.root, className)}>
       <h1 className={styles.title}>
         {selectedExercise.type === ExerciseType.REVIEW ? 'שיעור' : 'תרגול'}
       </h1>
+      <div className={styles.divider} />
+      <div className={styles.newLetters}>
+        <LetterKeycap letter={selectedExercise.newLetters[0]} />
+        <LetterKeycap letter={selectedExercise.newLetters[1]} />
+      </div>
     </div>
   );
 };

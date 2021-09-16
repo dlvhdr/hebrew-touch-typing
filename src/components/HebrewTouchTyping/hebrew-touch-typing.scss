@@ -6,10 +6,6 @@
   direction: rtl;
 }
 
-h1 {
-  margin-bottom: 24px;
-}
-
 .keyboard {
   display: flex;
   flex-direction: row;
@@ -30,10 +26,41 @@ h1 {
   padding: 4px;
   opacity: 0;
   position: fixed;
+  bottom: 0;
   left: 50% - calc(50%);
 }
 
 .keyboard-svg {
   width: 529px;
   height: 292px;
+}
+
+.title {
+  margin-bottom: 90px;
+}
+
+.empty-state {
+  margin-block: 10vh;
+  height: 500px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  h1 {
+    position: relative;
+    width: 20vw;
+    align-self: flex-start;
+    text-align: right;
+    top: 100px;
+
+    &::after {
+      content: '';
+      height: 4px;
+      background: rgba(255, 110, 99, 0.4);
+      position: absolute;
+      width: 4ch;
+      top: 2ch;
+      right: 0;
+    }
+  }
 }
