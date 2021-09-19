@@ -4,6 +4,7 @@
   padding-block: min(10vh, 135px);
   text-align: right;
   direction: rtl;
+  align-items: flex-start;
 }
 
 .keyboard {
@@ -39,28 +40,19 @@
   margin-bottom: 90px;
 }
 
-.empty-state {
-  margin-block: 10vh;
-  height: 500px;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
+.wpm {
+  font-family: 'Cousine-Regular';
+  font-size: 1.125em;
+  text-align: right;
+  direction: ltr;
+  border-top: 1px solid #dadada;
+  padding-block: 16px;
+  margin-bottom: 50px;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
 
-  h1 {
-    position: relative;
-    width: 20vw;
-    align-self: flex-start;
-    text-align: right;
-    top: 100px;
-
-    &::after {
-      content: '';
-      height: 4px;
-      background: rgba(255, 110, 99, 0.4);
-      position: absolute;
-      width: 4ch;
-      top: 2ch;
-      right: 0;
-    }
-  }
+.wpm-shown {
+  opacity: 1;
 }

@@ -1,17 +1,21 @@
-import {render, RenderResult} from '@testing-library/react';
-import React from 'react';
+import {render, RenderOptions, RenderResult} from '@testing-library/react';
+import React, {ReactElement} from 'react';
 import {ExerciseProvider} from '../components/ExerciseContext/ExerciseContext';
 import {LettersExercise} from './generateLetterExercises';
 
 export const renderWithProviders = (
-  element: React.ReactNode,
+  element: ReactElement,
   {initialExercise}: {initialExercise: LettersExercise | null} = {
     initialExercise: null,
   },
+  renderOptions?: Omit<RenderOptions, 'wrapper'>,
 ): RenderResult => {
-  return render(
-    <ExerciseProvider initialExercise={initialExercise}>
-      {element}
-    </ExerciseProvider>,
-  );
+  const CustomExerciseProvider: React.FC = ({children}): JSX.Element => {
+    return (
+      <ExerciseProvider initialExercise={initialExercise}>
+        {children}
+      </ExerciseProvider>
+    );
+  };
+  return render(element, {wrapper: CustomExerciseProvider, ...renderOptions});
 };

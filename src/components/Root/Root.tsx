@@ -12,7 +12,7 @@ const HebrewTouchTypingPage = (): React.ReactElement => {
       </a>
       <ExerciseProvider>
         <SideBar />
-        <HebrewTouchTyping className={styles.mainContent} />
+        <HebrewTouchTyping />
       </ExerciseProvider>
     </div>
   );

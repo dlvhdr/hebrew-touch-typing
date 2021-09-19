@@ -14,7 +14,6 @@ interface ExerciseProviderProps {
   children: React.ReactNode;
   initialExercise?: LettersExercise | null;
 }
-
 const ExerciseProvider = ({
   children,
   initialExercise = null,

@@ -4,10 +4,17 @@
     "es2021": true,
     "node": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:testing-library/react",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -18,7 +25,12 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "unused-imports"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "unused-imports",
+    "testing-library"
+  ],
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",

@@ -1,0 +1,29 @@
+.empty-state {
+  margin-block: 10vh;
+  height: 500px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  h1 {
+    position: relative;
+    width: 20vw;
+    align-self: flex-start;
+    text-align: right;
+    top: 100px;
+
+    &::after {
+      content: '';
+      height: 4px;
+      background: rgba(255, 110, 99, 0.4);
+      position: absolute;
+      width: 4ch;
+      top: 2ch;
+      right: 0;
+    }
+  }
+}
+
+.text-block {
+  margin-bottom: 20vh;
+}

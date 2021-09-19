@@ -1,9 +1,7 @@
 import classNames from 'classnames';
 import React, {useMemo} from 'react';
-import {
-  ExerciseType,
-  LettersExercise,
-} from '../../utils/generateLetterExercises';
+import {ExerciseType} from '../../constants/practiceAndReviewLetterSets';
+import {LettersExercise} from '../../utils/generateLetterExercises';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
 import LetterKeycap from '../LetterKeycap/LetterKeycap';
 import * as styles from './exercise-menu-item.scss';
@@ -17,7 +15,7 @@ const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
 
   const isSelected = useMemo(() => {
     return selectedExercise?.index === exercise.index;
-  }, [selectedExercise]);
+  }, [exercise.index, selectedExercise?.index]);
 
   return (
     <button

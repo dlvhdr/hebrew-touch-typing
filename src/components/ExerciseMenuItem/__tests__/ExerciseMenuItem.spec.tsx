@@ -1,11 +1,9 @@
 import React from 'react';
 import {screen} from '@testing-library/react';
 import ExerciseMenuItem from '../ExerciseMenuItem';
-import {
-  ExerciseType,
-  LettersExercise,
-} from '../../../utils/generateLetterExercises';
+import {LettersExercise} from '../../../utils/generateLetterExercises';
 import {renderWithProviders} from '../../../utils/renderWithProviders';
+import {ExerciseType} from '../../../constants/practiceAndReviewLetterSets';
 
 const exercise: LettersExercise = {
   index: 22,

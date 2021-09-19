@@ -1,10 +1,12 @@
-import React, {KeyboardEvent, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import ExerciseTextBlock from '../ExerciseTextBlock/ExerciseTextBlock';
 import classNames from 'classnames';
 import * as styles from './hebrew-touch-typing.scss';
 import ExerciseTitle from '../ExerciseTitle/ExerciseTitle';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
-import {KeyboardWarriorSvg} from './KeyboardWarriorSvg';
+import ExerciseCompleteCard from '../ExerciseCompleteCard/ExerciseCompleteCard';
+import HeroSection from '../HeroSection/HeroSection';
+import {useWPM} from '../../utils/useWPM';
 
 interface HebrewTouchTypingProps {
   className?: string;
@@ -14,26 +16,38 @@ const HebrewTouchTyping = ({
   className,
 }: HebrewTouchTypingProps): React.ReactElement | null => {
   const {selectedExercise} = useExerciseContext();
-  if (selectedExercise == null) {
-    return (
-      <div className={styles.emptyState}>
-        <h1>האתר ללמוד בו הקדלה עיוורת בעברית</h1>
-        <KeyboardWarriorSvg />
-      </div>
-    );
-  }
-
-  const text = selectedExercise.text.join('');
+  const [isExerciseComplete, setIsExerciseComplete] = useState(false);
+  const text = useMemo(
+    () => selectedExercise?.text.join('') ?? '',
+    [selectedExercise],
+  );
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [inputValue, setInputValue] = useState('');
-  const [textIndex, setTextIndex] = useState(0);
-  const onInputValueChange = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== text[textIndex]) {
-      return;
-    }
+  const {wpm, elapsedTimeSeconds} = useWPM(inputValue, text);
+  const isFinished = text.length === inputValue.length;
 
-    setTextIndex(index => index + 1);
-  };
+  useEffect(() => {
+    setInputValue('');
+    setIsExerciseComplete(false);
+  }, [selectedExercise]);
+
+  const onInputChanged = useCallback(
+    (newText: string) => {
+      if (isExerciseComplete) {
+        return;
+      }
+
+      setInputValue(newText);
+      if (newText.length === text.length) {
+        setIsExerciseComplete(true);
+      }
+    },
+    [isExerciseComplete, text],
+  );
+
+  if (selectedExercise == null) {
+    return <HeroSection />;
+  }
 
   return (
     <div className={classNames(styles.root, className)}>
@@ -45,11 +59,25 @@ const HebrewTouchTyping = ({
         autoFocus={true}
         onBlur={() => inputRef.current?.focus()}
         value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
-        onKeyPress={onInputValueChange}
+        onChange={e => onInputChanged(e.target.value)}
       ></input>
       <ExerciseTitle className={styles.title} />
       <ExerciseTextBlock userInputText={inputValue} />
+      <div
+        className={classNames(styles.wpm, {
+          [styles.wpmShown]: elapsedTimeSeconds > 1 && !isFinished,
+        })}
+      >
+        {wpm.toFixed(0)} WPM
+      </div>
+      {isExerciseComplete && (
+        <ExerciseCompleteCard
+          wpm={wpm}
+          inputText={inputValue}
+          exerciseText={text}
+        />
+      )}
+
       {/* <object
         id="keyboard-svg"
         className={styles.keyboardSvg}

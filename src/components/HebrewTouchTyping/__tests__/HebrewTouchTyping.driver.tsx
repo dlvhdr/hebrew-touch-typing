@@ -2,38 +2,44 @@ import React from 'react';
 import {screen, fireEvent} from '@testing-library/react';
 import HebrewTouchTyping from '../HebrewTouchTyping';
 import {renderWithProviders} from '../../../utils/renderWithProviders';
-import {
-  ExerciseType,
-  LettersExercise,
-} from '../../../utils/generateLetterExercises';
+import {LettersExercise} from '../../../utils/generateLetterExercises';
+import {ExerciseType} from '../../../constants/practiceAndReviewLetterSets';
+import SideBar from '../../SideBar/SideBar';
+import userEvent from '@testing-library/user-event';
 
 export type HebrewTouchTypingDriver = {
   when: {
     render: () => Element;
     textIsTyped: (text: string) => void;
+    exerciseIsSelected: (exerciseNumberLabel: string) => void;
   };
   get: {
     textLength: () => number;
     statelessLetters: () => HTMLElement[];
-    correctLetters: () => HTMLElement[];
+    correctLetters: () => Promise<HTMLElement[]>;
     incorrectLetters: () => HTMLElement[];
     currentLetter: () => HTMLElement | null;
   };
 };
 export const getDriver = (): HebrewTouchTypingDriver => {
-  const text = ['שורה 1 ', 'שורה 2'];
-  const exercise: LettersExercise = {
+  const initialExercise: LettersExercise = {
     index: 0,
     type: ExerciseType.REVIEW,
-    text,
+    text: ['שורה 1 ', 'שורה 2'],
     newLetters: ['1', '2'],
   };
   return {
     when: {
       render: (): Element => {
-        const {baseElement} = renderWithProviders(<HebrewTouchTyping />, {
-          initialExercise: exercise,
-        });
+        const {baseElement} = renderWithProviders(
+          <>
+            <SideBar />
+            <HebrewTouchTyping />
+          </>,
+          {
+            initialExercise,
+          },
+        );
         return baseElement;
       },
       textIsTyped: (text: string) => {
@@ -42,14 +48,17 @@ export const getDriver = (): HebrewTouchTypingDriver => {
           target: {value: text},
         });
       },
+      exerciseIsSelected: (exerciseNumberLabel: string) => {
+        userEvent.click(screen.getByText(exerciseNumberLabel));
+      },
     },
     get: {
-      textLength: () => text.join('').length,
+      textLength: () => initialExercise.text.join('').length,
       statelessLetters: () => {
         return screen.queryAllByTestId('letter');
       },
-      correctLetters: () => {
-        return screen.queryAllByTestId('correctLetter');
+      correctLetters: async () => {
+        return await screen.findAllByTestId('correctLetter').catch(() => []);
       },
       incorrectLetters: () => {
         return screen.queryAllByTestId('incorrectLetter');

@@ -1,0 +1,20 @@
+.root {
+  padding: 20px;
+  background-color: #ffe8d6;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+  width: 390px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 1.625em;
+  font-family: 'Cousine-Regular';
+  color: #202337;
+  direction: ltr;
+}

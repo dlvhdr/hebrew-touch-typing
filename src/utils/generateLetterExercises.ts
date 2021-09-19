@@ -1,17 +1,16 @@
-import {letterLearningOrder} from '../constants/practiceAndReviewLetterSets';
+import {
+  ExerciseType,
+  LessonNewLetters,
+  Letter,
+  LetterExerciseDescriptor,
+  LetterExerciseDescriptors,
+} from '../constants/practiceAndReviewLetterSets';
 
 const LESSON_LINE_LENGTH = 25;
 const LESSON_NUM_LINES = 3;
-const AVERAGE_WORD_LENGTH = 5;
+export const AVERAGE_WORD_LENGTH = 5;
 
-export type Letter = string;
-export type LessonNewLetters = [Letter, Letter];
 export type ExerciseText = string[];
-
-export enum ExerciseType {
-  REVIEW = 'review',
-  PRACTICE = 'practice',
-}
 
 interface BaseExercise {
   index: number;
@@ -36,24 +35,26 @@ const generateRandomWordLength = () => {
 };
 
 const generateRandomLetter = (lettersSet: Letter[]): Letter | ' ' => {
-  const index = Math.floor(Math.random() * (lettersSet.length + 1));
+  const index = Math.round(Math.random() * (lettersSet.length - 1));
   return lettersSet[index];
 };
 
-const generateRandomLine = (lettersSet: Letter[]) => {
+const generateRandomLine = (lettersSet: Letter[], lineNumber: number) => {
   const numSpaces = LESSON_LINE_LENGTH / AVERAGE_WORD_LENGTH;
   const wordLengths = new Array(numSpaces)
     .fill(undefined)
     .map(generateRandomWordLength);
   const randomWords = wordLengths
     .map(length =>
-      new Array(length + 1)
+      new Array(length)
         .fill(undefined)
         .map(() => generateRandomLetter(lettersSet))
         .join(''),
     )
     .flat();
-  return randomWords.join(' ') + ' ';
+  return (
+    randomWords.join(' ') + (lineNumber !== LESSON_NUM_LINES - 1 ? ' ' : '')
+  );
 };
 
 const getEmptyLinesArray = (): undefined[] => {
@@ -63,35 +64,34 @@ const getEmptyLinesArray = (): undefined[] => {
 export const generateLetterReviewExercise = (
   lessonLetters: LessonNewLetters,
 ): ExerciseText => {
-  return getEmptyLinesArray().map(_line => generateRandomLine(lessonLetters));
+  return getEmptyLinesArray().map((_line, lineNumber) =>
+    generateRandomLine(lessonLetters, lineNumber),
+  );
 };
 
 export const generateLetterPracticeExercise = (
-  exerciseNumber: number,
+  exerciseIndex: number,
 ): ExerciseText => {
-  const letters = letterLearningOrder.slice(0, exerciseNumber + 1).flat();
-  return getEmptyLinesArray().map(_line => generateRandomLine(letters));
+  const letters = LetterExerciseDescriptors.slice(0, exerciseIndex + 1)
+    .map(descriptor => descriptor.newLetters)
+    .flat();
+  return getEmptyLinesArray().map((_line, lineIndex) =>
+    generateRandomLine(letters, lineIndex),
+  );
 };
 
 export const getFullListOfPracticeAndReviewExercises =
   (): LettersExercise[] => {
-    return letterLearningOrder
-      .map((newLetters: LessonNewLetters, index: number) => {
-        const exerciseNumber = index * 2;
-        return [
-          {
-            index: exerciseNumber,
-            newLetters,
-            text: generateLetterReviewExercise(newLetters),
-            type: ExerciseType.REVIEW,
-          },
-          {
-            index: exerciseNumber + 1,
-            newLetters,
-            text: generateLetterPracticeExercise(exerciseNumber),
-            type: ExerciseType.PRACTICE,
-          },
-        ];
-      })
-      .flat();
+    return LetterExerciseDescriptors.map(
+      (exerciseDescriptor: LetterExerciseDescriptor, index: number) => {
+        return {
+          ...exerciseDescriptor,
+          index,
+          text:
+            exerciseDescriptor.type === ExerciseType.PRACTICE
+              ? generateLetterPracticeExercise(index)
+              : generateLetterReviewExercise(exerciseDescriptor.newLetters),
+        };
+      },
+    );
   };

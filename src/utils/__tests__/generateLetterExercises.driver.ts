@@ -1,9 +1,11 @@
+import {
+  LessonNewLetters,
+  Letter,
+} from '../../constants/practiceAndReviewLetterSets';
 import {ExerciseText} from '../../utils/generateLetterExercises';
 import {
   generateLetterPracticeExercise,
   generateLetterReviewExercise,
-  LessonNewLetters,
-  Letter,
 } from '../generateLetterExercises';
 
 export type LetterExercisesGeneratorDriver = {
@@ -33,8 +35,8 @@ export const getDriver = (): LetterExercisesGeneratorDriver => {
       letterPracticeExercise: (exerciseNumber: number): ExerciseText => {
         return generateLetterPracticeExercise(exerciseNumber);
       },
-      lettersInExercise: (exercise: ExerciseText): Set<Letter> => {
-        return Array.from(exercise.join('')).reduce(
+      lettersInExercise: (exerciseText: ExerciseText): Set<Letter> => {
+        return Array.from(exerciseText.join('')).reduce(
           (set: Set<Letter>, letter: Letter) => {
             return set.add(letter);
           },

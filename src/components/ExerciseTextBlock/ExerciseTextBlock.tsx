@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, {useCallback} from 'react';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
 import Letter, {LetterState} from '../Letter/Letter';
@@ -6,6 +7,7 @@ import * as styles from './exercise-text-block.scss';
 
 interface ExerciseTextProps {
   userInputText: string;
+  className?: string;
 }
 
 interface LineMarker {
@@ -15,13 +17,11 @@ interface LineMarker {
 
 const ExerciseTextBlock: React.FC<ExerciseTextProps> = ({
   userInputText,
+  className,
 }: ExerciseTextProps) => {
   const {selectedExercise} = useExerciseContext();
-  if (selectedExercise == null) {
-    return null;
-  }
-  const text = selectedExercise.text.join('');
-  const lineIndexes = selectedExercise.text.reduce<LineMarker[]>(
+  const text = selectedExercise?.text.join('') ?? '';
+  const lineIndexes = selectedExercise?.text.reduce<LineMarker[]>(
     (soFar: LineMarker[], line: string) => {
       const start = soFar.length === 0 ? 0 : soFar[soFar.length - 1].end;
       return [
@@ -51,9 +51,13 @@ const ExerciseTextBlock: React.FC<ExerciseTextProps> = ({
     [userInputText],
   );
 
+  if (selectedExercise == null) {
+    return null;
+  }
+
   return (
-    <div className={styles.text}>
-      {lineIndexes.map(({start, end}) => (
+    <div className={classNames(styles.text, className)}>
+      {lineIndexes?.map(({start, end}) => (
         <div key={`line_${start}`} className={styles.line} data-testid="line">
           {Array.from(text)
             .slice(start, end)

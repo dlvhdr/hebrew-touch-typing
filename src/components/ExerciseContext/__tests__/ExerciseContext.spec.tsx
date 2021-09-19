@@ -1,10 +1,8 @@
 import React from 'react';
 import {screen, render, fireEvent} from '@testing-library/react';
 import {ExerciseProvider, useExerciseContext} from '../ExerciseContext';
-import {
-  ExerciseType,
-  LettersExercise,
-} from '../../../utils/generateLetterExercises';
+import {LettersExercise} from '../../../utils/generateLetterExercises';
+import {ExerciseType} from '../../../constants/practiceAndReviewLetterSets';
 
 const TestedComponent: React.FC<{fakeExercise?: LettersExercise}> = ({
   fakeExercise,

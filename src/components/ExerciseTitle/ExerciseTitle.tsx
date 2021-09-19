@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import {ExerciseType} from '../../utils/generateLetterExercises';
+import {ExerciseType} from '../../constants/practiceAndReviewLetterSets';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
 import LetterKeycap from '../LetterKeycap/LetterKeycap';
 import * as styles from './exercise-title.scss';
