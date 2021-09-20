@@ -1,4 +1,4 @@
-import {cleanup, render, screen, waitFor} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import React, {useState} from 'react';
 import userEvent from '@testing-library/user-event';
 import {useWPM} from '../useWPM';
@@ -37,7 +37,7 @@ const typeSlowly = (input: HTMLElement, text: string): SlowTypedTextResult => {
     userEvent.keyboard(letter);
   });
   return {
-    timePassedMs: timePassedMs,
+    timePassedMs,
     lettersTyped: text.length,
     finalWPM: text.length / (timePassedMs / 1000 / 60) / AVERAGE_WORD_LENGTH,
   };
@@ -45,13 +45,11 @@ const typeSlowly = (input: HTMLElement, text: string): SlowTypedTextResult => {
 
 describe('WPM Tracker', () => {
   beforeEach(() => {
-    cleanup();
     jest.useFakeTimers();
   });
 
   afterEach(() => {
     jest.useRealTimers();
-    cleanup();
   });
 
   it('should track the WPM as you type', async () => {

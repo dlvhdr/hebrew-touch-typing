@@ -10,12 +10,17 @@ const SECONDS_IN_MINUTE = 60;
 interface WPMHook {
   wpm: number;
   elapsedTimeSeconds: number;
+  resetWPM: () => void;
 }
 
 export const useWPM = (input: string, text: string): WPMHook => {
   const [wpm, setWPM] = useState(0);
-  const startTimeRef = useRef<number>();
+  const startTimeRef = useRef<number | null>();
   const isFinished = input.length === text.length;
+
+  const resetWPM = useCallback(() => {
+    startTimeRef.current = null;
+  }, []);
 
   const getElapsedTime = (): number => {
     if (!startTimeRef.current) {
@@ -43,5 +48,9 @@ export const useWPM = (input: string, text: string): WPMHook => {
 
   useInterval(calculateWPM, isFinished ? null : WPM_REFRESH_RATE_MS);
 
-  return {wpm, elapsedTimeSeconds: getElapsedTime()};
+  return {
+    wpm,
+    elapsedTimeSeconds: getElapsedTime(),
+    resetWPM,
+  };
 };

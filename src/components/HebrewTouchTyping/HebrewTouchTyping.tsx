@@ -23,13 +23,14 @@ const HebrewTouchTyping = ({
   );
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [inputValue, setInputValue] = useState('');
-  const {wpm, elapsedTimeSeconds} = useWPM(inputValue, text);
+  const {wpm, elapsedTimeSeconds, resetWPM} = useWPM(inputValue, text);
   const isFinished = text.length === inputValue.length;
 
   useEffect(() => {
     setInputValue('');
     setIsExerciseComplete(false);
-  }, [selectedExercise]);
+    resetWPM();
+  }, [resetWPM, selectedExercise]);
 
   const onInputChanged = useCallback(
     (newText: string) => {
