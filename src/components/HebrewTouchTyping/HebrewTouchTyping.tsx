@@ -7,6 +7,7 @@ import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
 import ExerciseCompleteCard from '../ExerciseCompleteCard/ExerciseCompleteCard';
 import HeroSection from '../HeroSection/HeroSection';
 import {useWPM} from '../../utils/useWPM';
+import {KeyboardSvg} from '../KeyboardSvg/KeyboardSvg';
 
 interface HebrewTouchTypingProps {
   className?: string;
@@ -25,6 +26,10 @@ const HebrewTouchTyping = ({
   const [inputValue, setInputValue] = useState('');
   const {wpm, elapsedTimeSeconds, resetWPM} = useWPM(inputValue, text);
   const isFinished = text.length === inputValue.length;
+
+  const currentLetter = useMemo(() => {
+    return text[Math.max(0, inputValue.length)];
+  }, [inputValue, text]);
 
   useEffect(() => {
     setInputValue('');
@@ -71,22 +76,15 @@ const HebrewTouchTyping = ({
       >
         {wpm.toFixed(0)} WPM
       </div>
-      {isExerciseComplete && (
+      {isExerciseComplete ? (
         <ExerciseCompleteCard
           wpm={wpm}
           inputText={inputValue}
           exerciseText={text}
         />
+      ) : (
+        <KeyboardSvg currentLetter={currentLetter} />
       )}
-
-      {/* <object
-        id="keyboard-svg"
-        className={styles.keyboardSvg}
-        type="image/svg+xml"
-        data={KeyboardSvg}
-      >
-        Keyboard SVG
-      </object> */}
     </div>
   );
 };

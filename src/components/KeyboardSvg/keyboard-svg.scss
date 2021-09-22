@@ -1,0 +1,16 @@
+.root {
+  width: 529px;
+  height: 292px;
+}
+
+.inactive-finger {
+  stroke: transparent;
+}
+
+.current-finger {
+  stroke: #00c5d1;
+}
+
+.active-keycap {
+  fill: rgba(0, 199, 209, 0.315);
+}
