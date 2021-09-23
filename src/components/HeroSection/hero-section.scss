@@ -10,7 +10,6 @@
     width: 20vw;
     align-self: flex-start;
     text-align: right;
-    top: 100px;
 
     &::after {
       content: '';
@@ -26,4 +25,36 @@
 
 .text-block {
   margin-bottom: 20vh;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.start-button {
+  cursor: pointer;
+  margin-top: 80px;
+  align-self: flex-end;
+  border-radius: 4px;
+  padding: 10px 40px;
+  font-family: 'Heebo-Bold';
+  font-size: 24px;
+  line-height: 100%;
+  color: #31797d;
+  border: none;
+  background-color: #94dade;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #91d0d4;
+  }
+
+  &:active {
+    background-color: #79afb3;
+  }
 }

@@ -1,9 +1,14 @@
-import React, {useState} from 'react';
-import {Exercise} from '../../utils/generateLetterExercises';
+import React, {useCallback, useMemo, useState} from 'react';
+import {
+  Exercise,
+  getFullListOfPracticeAndReviewExercises,
+  getListOfTextExercises,
+} from '../../utils/generateLetterExercises';
 
 interface ExerciseContextType {
   selectedExercise: Exercise | null;
   setSelectedExercise: (exercise: Exercise | null) => void;
+  setSelectedExerciseNumber: (exerciseIndex: number) => void;
 }
 
 const ExerciseContext = React.createContext<ExerciseContextType | undefined>(
@@ -22,11 +27,26 @@ const ExerciseProvider = ({
     initialExercise,
   );
 
+  const allExercises = useMemo(() => {
+    return [
+      ...getFullListOfPracticeAndReviewExercises(),
+      ...getListOfTextExercises(),
+    ];
+  }, []);
+
+  const setSelectedExerciseNumber = useCallback(
+    (exerciseIndex: number) => {
+      setSelectedExercise(allExercises[exerciseIndex]);
+    },
+    [allExercises],
+  );
+
   return (
     <ExerciseContext.Provider
       value={{
         selectedExercise,
         setSelectedExercise,
+        setSelectedExerciseNumber,
       }}
     >
       {children}
