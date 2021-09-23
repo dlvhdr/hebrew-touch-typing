@@ -4,6 +4,7 @@ import {ExerciseType} from '../../constants/practiceAndReviewLetterSets';
 import {LettersExercise} from '../../utils/generateLetterExercises';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
 import LetterKeycap from '../LetterKeycap/LetterKeycap';
+import {useUserDataContext} from '../UserDataProvider/UserDataProvider';
 import * as styles from './exercise-menu-item.scss';
 
 interface ExerciseMenuItemProps {
@@ -11,7 +12,12 @@ interface ExerciseMenuItemProps {
 }
 
 const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
+  const {userData} = useUserDataContext();
   const {selectedExercise, setSelectedExercise} = useExerciseContext();
+
+  const wpmRecord = useMemo(() => {
+    return userData.exercises[exercise.index]?.wpmRecord;
+  }, [exercise.index, userData]);
 
   const isSelected = useMemo(() => {
     return selectedExercise?.index === exercise.index;
@@ -25,6 +31,9 @@ const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
       data-testid="exercise-menu-item"
       onClick={() => setSelectedExercise(exercise)}
     >
+      {wpmRecord && (
+        <div className={styles.wpm}>{wpmRecord.toFixed(0)} WPM</div>
+      )}
       <div className={styles.lessonType}>
         {exercise.type === ExerciseType.PRACTICE ? 'תרגול' : 'שיעור'}
       </div>
@@ -33,7 +42,12 @@ const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
           <LetterKeycap key={letter} letter={letter} />
         ))}
       </div>
-      <div className={styles.exerciseNumberPill}>{exercise.index + 1}</div>
+      <div
+        data-testid={`exercise-number-pill-${exercise.index + 1}`}
+        className={styles.exerciseNumberPill}
+      >
+        {exercise.index + 1}
+      </div>
     </button>
   );
 };

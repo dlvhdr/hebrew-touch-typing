@@ -49,7 +49,9 @@ export const getDriver = (): HebrewTouchTypingDriver => {
         });
       },
       exerciseIsSelected: (exerciseNumberLabel: string) => {
-        userEvent.click(screen.getByText(exerciseNumberLabel));
+        userEvent.click(
+          screen.getByTestId(`exercise-number-pill-${exerciseNumberLabel}`),
+        );
       },
     },
     get: {
@@ -58,7 +60,7 @@ export const getDriver = (): HebrewTouchTypingDriver => {
         return screen.queryAllByTestId('letter');
       },
       correctLetters: async () => {
-        return await screen.findAllByTestId('correctLetter').catch(() => []);
+        return screen.findAllByTestId('correctLetter');
       },
       incorrectLetters: () => {
         return screen.queryAllByTestId('incorrectLetter');

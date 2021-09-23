@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: repeat(2, auto);
   cursor: pointer;
   padding: 8px;
@@ -27,6 +27,7 @@
   justify-content: center;
   border-radius: 20px;
   grid-row-start: 2;
+  grid-column-start: 3;
   height: 20px;
   align-self: center;
   margin-left: 24px;
@@ -35,6 +36,7 @@
 
 .keycaps {
   grid-row-start: 2;
+  grid-column-start: 2;
   display: flex;
   flex-direction: row-reverse;
   gap: 12px;
@@ -52,8 +54,16 @@
   color: white;
   height: 15px;
   width: fit-content;
+  grid-column: 2;
 }
 
 .selected-exercise {
   background: #efd3bd;
+}
+
+.wpm {
+  font-family: 'Cousine-Regular';
+  font-size: 1em;
+  color: #716054;
+  grid-row-start: 2;
 }

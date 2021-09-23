@@ -1,4 +1,4 @@
-import {render, screen, waitFor} from '@testing-library/react';
+import {act, render, screen, waitFor} from '@testing-library/react';
 import React, {useState} from 'react';
 import userEvent from '@testing-library/user-event';
 import {useWPM} from '../useWPM';
@@ -6,7 +6,7 @@ import {AVERAGE_WORD_LENGTH} from '../generateLetterExercises';
 
 const TestComponent = ({text}: {text: string}) => {
   const [inputValue, setInputValue] = useState('');
-  const {wpm} = useWPM(inputValue, text);
+  const {wpm, resetWPM, isFinished} = useWPM(inputValue, text);
   return (
     <div>
       <input
@@ -17,6 +17,8 @@ const TestComponent = ({text}: {text: string}) => {
         }}
       />
       <span data-testid="wpm">{wpm}</span>
+      <button onClick={resetWPM}>Reset</button>
+      <div data-testid="is_finished">{String(isFinished)}</div>
     </div>
   );
 };
@@ -57,23 +59,37 @@ describe('WPM Tracker', () => {
     render(<TestComponent text={text} />);
     const input = screen.getByTestId('input');
 
-    typeSlowly(input, text);
+    await act(async () => {
+      const {timePassedMs} = typeSlowly(input, text);
 
-    await waitFor(() => expect(input).toHaveValue(text));
-    expect(Number(screen.getByTestId('wpm').textContent)).toBeGreaterThan(12);
+      await waitFor(
+        () =>
+          expect(screen.getByTestId('is_finished')).toHaveTextContent('true'),
+        {timeout: timePassedMs},
+      );
+
+      expect(Number(screen.getByTestId('wpm').textContent)).toBeGreaterThan(12);
+    });
   });
 
   it('should adjust the WPM as time passes without any typing', async () => {
     const text = 'word1word2';
     render(<TestComponent text={text} />);
+    const input = screen.getByTestId('input');
 
     const firstWord = text.substr(0, 5);
-    typeSlowly(screen.getByTestId('input'), firstWord);
-    jest.advanceTimersByTime(2 * 60 * 1000);
-
+    const secondWord = text.substr(5, 5);
+    await act(async () => {
+      typeSlowly(input, firstWord);
+      jest.advanceTimersByTime(2 * 60 * 1000);
+    });
     await waitFor(() =>
       expect(Number(screen.getByTestId('wpm').textContent)).toBeLessThan(2),
     );
+    await act(async () => {
+      typeSlowly(input, secondWord);
+      await waitFor(() => expect(input).toHaveValue(text));
+    });
   });
 
   it('should provide the final wpm when exercise is complete', async () => {
@@ -81,12 +97,15 @@ describe('WPM Tracker', () => {
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, repellendus consequatur fugiat suscipit aliquam tempore ipsam ipsa dolorum rem iste enim omnis sit qui excepturi voluptate minus perferendis quia velit.';
     render(<TestComponent text={text} />);
     const input = screen.getByTestId('input') as HTMLInputElement;
-    const {finalWPM, timePassedMs} = typeSlowly(input, text);
-    await waitFor(() => expect(input.value).toContain(text), {
-      timeout: timePassedMs,
+
+    await act(async () => {
+      const {finalWPM, timePassedMs} = typeSlowly(input, text);
+      await waitFor(() => expect(input.value).toContain(text), {
+        timeout: timePassedMs,
+      });
+      expect(Number(screen.getByTestId('wpm').textContent)).toBeGreaterThan(0);
+      const displayedWPM = Number(screen.getByTestId('wpm').textContent);
+      expect(Math.round(finalWPM)).toBe(Math.round(displayedWPM));
     });
-    expect(Number(screen.getByTestId('wpm').textContent)).toBeGreaterThan(0);
-    const displayedWPM = Number(screen.getByTestId('wpm').textContent);
-    expect(Math.round(finalWPM)).toBe(Math.round(displayedWPM));
   });
 });

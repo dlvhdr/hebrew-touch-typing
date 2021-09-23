@@ -3,6 +3,7 @@ import HebrewTouchTyping from '../HebrewTouchTyping/HebrewTouchTyping';
 import SideBar from '../SideBar/SideBar';
 import {ExerciseProvider} from '../ExerciseContext/ExerciseContext';
 import * as styles from './root.scss';
+import {UserDataProvider} from '../UserDataProvider/UserDataProvider';
 
 const HebrewTouchTypingPage = (): React.ReactElement => {
   return (
@@ -11,8 +12,10 @@ const HebrewTouchTypingPage = (): React.ReactElement => {
         <h3>DLVHDR</h3>
       </a>
       <ExerciseProvider>
-        <SideBar />
-        <HebrewTouchTyping />
+        <UserDataProvider>
+          <SideBar />
+          <HebrewTouchTyping />
+        </UserDataProvider>
       </ExerciseProvider>
     </div>
   );

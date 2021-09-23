@@ -28,7 +28,9 @@ describe('text transform', () => {
     driver.when.textIsTyped('שורה');
     driver.when.exerciseIsSelected('3');
 
-    const correctLetterElements = await driver.get.correctLetters();
+    const correctLetterElements = await driver.get
+      .correctLetters()
+      .catch(() => []);
     const incorrectLetterElements = driver.get.incorrectLetters();
     const statelessLetters = driver.get.statelessLetters();
     expect(statelessLetters.length).toBeGreaterThan(0);
@@ -60,7 +62,9 @@ describe('text transform', () => {
     const letterElements = driver.get.statelessLetters();
     expect(letterElements).toHaveLength(driver.get.textLength() - 2);
 
-    const correctLetterElements = await driver.get.correctLetters();
+    const correctLetterElements = await driver.get
+      .correctLetters()
+      .catch(() => []);
     expect(correctLetterElements).toHaveLength(0);
 
     const incorrectLetterelements = driver.get.incorrectLetters();

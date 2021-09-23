@@ -1,6 +1,7 @@
 import {render, RenderOptions, RenderResult} from '@testing-library/react';
 import React, {ReactElement} from 'react';
 import {ExerciseProvider} from '../components/ExerciseContext/ExerciseContext';
+import {UserDataProvider} from '../components/UserDataProvider/UserDataProvider';
 import {LettersExercise} from './generateLetterExercises';
 
 export const renderWithProviders = (
@@ -13,7 +14,7 @@ export const renderWithProviders = (
   const CustomExerciseProvider: React.FC = ({children}): JSX.Element => {
     return (
       <ExerciseProvider initialExercise={initialExercise}>
-        {children}
+        <UserDataProvider>{children}</UserDataProvider>
       </ExerciseProvider>
     );
   };

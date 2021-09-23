@@ -8,6 +8,7 @@ import ExerciseCompleteCard from '../ExerciseCompleteCard/ExerciseCompleteCard';
 import HeroSection from '../HeroSection/HeroSection';
 import {useWPM} from '../../utils/useWPM';
 import {KeyboardSvg} from '../KeyboardSvg/KeyboardSvg';
+import {useUserDataContext} from '../UserDataProvider/UserDataProvider';
 
 interface HebrewTouchTypingProps {
   className?: string;
@@ -26,6 +27,7 @@ const HebrewTouchTyping = ({
   const [inputValue, setInputValue] = useState('');
   const {wpm, elapsedTimeSeconds, resetWPM} = useWPM(inputValue, text);
   const isFinished = text.length === inputValue.length;
+  const {persistExerciseIfNewRecord} = useUserDataContext();
 
   const currentLetter = useMemo(() => {
     return text[Math.max(0, inputValue.length)];
@@ -37,18 +39,30 @@ const HebrewTouchTyping = ({
     resetWPM();
   }, [resetWPM, selectedExercise]);
 
+  const onExerciseCompleted = useCallback(() => {
+    if (selectedExercise == null) {
+      return;
+    }
+
+    persistExerciseIfNewRecord({
+      exerciseIndex: selectedExercise.index,
+      wpmRecord: wpm,
+    });
+    setIsExerciseComplete(true);
+  }, [persistExerciseIfNewRecord, selectedExercise, wpm]);
+
   const onInputChanged = useCallback(
     (newText: string) => {
-      if (isExerciseComplete) {
+      if (selectedExercise == null || isExerciseComplete) {
         return;
       }
 
       setInputValue(newText);
       if (newText.length === text.length) {
-        setIsExerciseComplete(true);
+        onExerciseCompleted();
       }
     },
-    [isExerciseComplete, text],
+    [isExerciseComplete, onExerciseCompleted, selectedExercise, text.length],
   );
 
   if (selectedExercise == null) {

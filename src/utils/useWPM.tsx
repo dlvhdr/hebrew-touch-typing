@@ -1,4 +1,4 @@
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useMemo, useRef, useState} from 'react';
 import {getNumOfCorrectCharacters} from './exerciseUtils';
 import {useInterval} from './useInterval';
 
@@ -11,12 +11,16 @@ interface WPMHook {
   wpm: number;
   elapsedTimeSeconds: number;
   resetWPM: () => void;
+  isFinished: boolean;
 }
 
 export const useWPM = (input: string, text: string): WPMHook => {
   const [wpm, setWPM] = useState(0);
   const startTimeRef = useRef<number | null>();
-  const isFinished = input.length === text.length;
+  const isFinished = useMemo(
+    () => input.length === text.length,
+    [input.length, text.length],
+  );
 
   const resetWPM = useCallback(() => {
     startTimeRef.current = null;
@@ -52,5 +56,6 @@ export const useWPM = (input: string, text: string): WPMHook => {
     wpm,
     elapsedTimeSeconds: getElapsedTime(),
     resetWPM,
+    isFinished,
   };
 };
