@@ -1,7 +1,8 @@
 .root {
-  width: 360px;
+  min-width: 360px;
+  max-width: 20vw;
   height: 100vh;
-  padding: 40px 50px;
+  padding: 40px 36px;
   background: #ffe8d6;
   display: flex;
   flex-direction: column;

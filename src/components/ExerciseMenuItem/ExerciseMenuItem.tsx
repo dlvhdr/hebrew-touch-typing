@@ -1,14 +1,18 @@
 import classNames from 'classnames';
 import React, {useMemo} from 'react';
 import {ExerciseType} from '../../constants/practiceAndReviewLetterSets';
-import {LettersExercise} from '../../utils/generateLetterExercises';
+import {
+  assertLettersExercise,
+  isLettersExercise,
+} from '../../utils/exerciseUtils';
+import {Exercise} from '../../utils/generateLetterExercises';
 import {useExerciseContext} from '../ExerciseContext/ExerciseContext';
 import LetterKeycap from '../LetterKeycap/LetterKeycap';
 import {useUserDataContext} from '../UserDataProvider/UserDataProvider';
 import * as styles from './exercise-menu-item.scss';
 
 interface ExerciseMenuItemProps {
-  exercise: LettersExercise;
+  exercise: Exercise;
 }
 
 const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
@@ -34,14 +38,21 @@ const ExerciseMenuItem: React.FC<ExerciseMenuItemProps> = ({exercise}) => {
       {wpmRecord && (
         <div className={styles.wpm}>{wpmRecord.toFixed(0)} WPM</div>
       )}
-      <div className={styles.lessonType}>
-        {exercise.type === ExerciseType.PRACTICE ? 'תרגול' : 'שיעור'}
-      </div>
-      <div className={styles.keycaps}>
-        {exercise.newLetters.map(letter => (
-          <LetterKeycap key={letter} letter={letter} />
-        ))}
-      </div>
+      {isLettersExercise(exercise) && (
+        <>
+          <div className={styles.lessonType}>
+            {exercise.type === ExerciseType.PRACTICE ? 'תרגול' : 'שיעור'}
+          </div>
+          <div className={styles.keycaps}>
+            {assertLettersExercise(exercise).newLetters.map(letter => (
+              <LetterKeycap key={letter} letter={letter} />
+            ))}
+          </div>
+        </>
+      )}
+      {exercise.type === ExerciseType.TEXT && (
+        <div className={styles.textExerciseLabel}>{exercise.label}</div>
+      )}
       <div
         data-testid={`exercise-number-pill-${exercise.index + 1}`}
         className={styles.exerciseNumberPill}

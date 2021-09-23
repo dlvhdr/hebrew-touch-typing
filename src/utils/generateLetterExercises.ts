@@ -5,6 +5,7 @@ import {
   LetterExerciseDescriptor,
   LetterExerciseDescriptors,
 } from '../constants/practiceAndReviewLetterSets';
+import {TextExercises} from '../exercises/textExercises';
 
 const LESSON_LINE_LENGTH = 25;
 const LESSON_NUM_LINES = 3;
@@ -12,10 +13,15 @@ export const AVERAGE_WORD_LENGTH = 5;
 
 export type ExerciseText = string[];
 
-interface BaseExercise {
+export interface BaseExercise {
   index: number;
   text: ExerciseText;
   type: ExerciseType;
+}
+
+export interface TextExercise extends BaseExercise {
+  type: ExerciseType.TEXT;
+  label: string;
 }
 
 export interface LettersReviewExercise extends BaseExercise {
@@ -29,6 +35,10 @@ export interface LettersPracticeExercise extends BaseExercise {
 }
 
 export type LettersExercise = LettersReviewExercise | LettersPracticeExercise;
+export type Exercise =
+  | LettersReviewExercise
+  | LettersPracticeExercise
+  | TextExercise;
 
 const generateRandomWordLength = () => {
   return Math.max(2, Math.floor(Math.random() * AVERAGE_WORD_LENGTH + 1));
@@ -95,3 +105,11 @@ export const getFullListOfPracticeAndReviewExercises =
       },
     );
   };
+
+export const getListOfTextExercises = (): TextExercise[] => {
+  return TextExercises.map((exercise, index) => ({
+    ...exercise,
+    type: ExerciseType.TEXT,
+    index: LetterExerciseDescriptors.length + index,
+  }));
+};

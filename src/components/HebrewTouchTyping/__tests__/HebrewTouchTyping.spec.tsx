@@ -1,4 +1,5 @@
 import {cleanup, screen} from '@testing-library/react';
+import {getListOfTextExercises} from '../../../utils/generateLetterExercises';
 import {getDriver} from './HebrewTouchTyping.driver';
 
 let driver: ReturnType<typeof getDriver>;
@@ -94,5 +95,13 @@ describe('text transform', () => {
     expect(
       screen.queryByTestId('exercise-completed-card'),
     ).not.toBeInTheDocument();
+  });
+
+  it('should allow selecting a text exercise', async () => {
+    const textExercises = getListOfTextExercises();
+    driver.when.render();
+
+    driver.when.exerciseIsSelected(`${textExercises[0].index}`);
+    expect(screen.getByText(textExercises[0].label)).toBeInTheDocument();
   });
 });

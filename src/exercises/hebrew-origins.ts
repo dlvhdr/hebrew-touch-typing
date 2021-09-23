@@ -1,4 +1,4 @@
-export const exercise = [
+const hebrewOriginsText = [
   'עברית היא שפה ממשפחת השפות השמיות, ',
   'הידועה כשפתו של העם היהודי, ',
   'ואשר ניב מודרני שלה משמש כשפה רשמית ',
@@ -6,3 +6,8 @@ export const exercise = [
   'העברית הייתה מדוברת החל מן האלף ',
   'ה-2 לפנה"ס באזור הלבנט.',
 ];
+
+export const hebrewOriginsExercise = {
+  text: hebrewOriginsText,
+  label: 'מקורות העברית',
+};

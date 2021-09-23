@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import React, {useState} from 'react';
-import {LettersExercise} from '../../utils/generateLetterExercises';
+import {Exercise} from '../../utils/generateLetterExercises';
 import ExerciseMenuItem from '../ExerciseMenuItem/ExerciseMenuItem';
 import * as styles from './exercise-list.scss';
 import ExpandIcon from './ExpandIcon';
 
 interface ExerciseListProps {
-  exercises: LettersExercise[];
+  exercises: Exercise[];
   title: string;
   emoji: string;
   className?: string;

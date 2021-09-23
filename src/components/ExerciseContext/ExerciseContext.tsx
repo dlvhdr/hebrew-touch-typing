@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {LettersExercise} from '../../utils/generateLetterExercises';
+import {Exercise} from '../../utils/generateLetterExercises';
 
 interface ExerciseContextType {
-  selectedExercise: LettersExercise | null;
-  setSelectedExercise: (exercise: LettersExercise | null) => void;
+  selectedExercise: Exercise | null;
+  setSelectedExercise: (exercise: Exercise | null) => void;
 }
 
 const ExerciseContext = React.createContext<ExerciseContextType | undefined>(
@@ -12,14 +12,15 @@ const ExerciseContext = React.createContext<ExerciseContextType | undefined>(
 
 interface ExerciseProviderProps {
   children: React.ReactNode;
-  initialExercise?: LettersExercise | null;
+  initialExercise?: Exercise | null;
 }
 const ExerciseProvider = ({
   children,
   initialExercise = null,
 }: ExerciseProviderProps): JSX.Element => {
-  const [selectedExercise, setSelectedExercise] =
-    useState<LettersExercise | null>(initialExercise);
+  const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(
+    initialExercise,
+  );
 
   return (
     <ExerciseContext.Provider

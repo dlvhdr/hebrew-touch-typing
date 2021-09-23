@@ -4,11 +4,12 @@ export type LessonNewLetters = [Letter, Letter];
 export enum ExerciseType {
   REVIEW = 'review',
   PRACTICE = 'practice',
+  TEXT = 'text',
 }
 
 export interface LetterExerciseDescriptor {
   newLetters: LessonNewLetters;
-  type: ExerciseType;
+  type: ExerciseType.PRACTICE | ExerciseType.REVIEW;
 }
 
 export const LetterExerciseDescriptors: LetterExerciseDescriptor[] = [

@@ -3,12 +3,13 @@ import {screen} from '@testing-library/react';
 import SideBar from './SideBar';
 import {LetterExerciseDescriptors} from '../../constants/practiceAndReviewLetterSets';
 import {renderWithProviders} from '../../utils/renderWithProviders';
+import {TextExercises} from '../../exercises/textExercises';
 
 describe('SideBar', () => {
   it('should list all the letters review and practice exercises', () => {
     renderWithProviders(<SideBar />);
     expect(screen.getAllByTestId('exercise-menu-item')).toHaveLength(
-      LetterExerciseDescriptors.length,
+      LetterExerciseDescriptors.length + TextExercises.length,
     );
   });
 });
