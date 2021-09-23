@@ -1,10 +1,22 @@
 .text {
   font-size: 1.6em;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
   font-family: 'Cousine-Regular';
   display: flex;
   flex-direction: column;
   gap: 1px;
+  max-height: 10ch;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    visibility: hidden;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .line {

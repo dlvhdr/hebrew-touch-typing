@@ -102,6 +102,6 @@ describe('text transform', () => {
     driver.when.render();
 
     driver.when.exerciseIsSelected(`${textExercises[0].index}`);
-    expect(screen.getByText(textExercises[0].label)).toBeInTheDocument();
+    expect(screen.getAllByText(textExercises[0].label)).toHaveLength(2);
   });
 });
