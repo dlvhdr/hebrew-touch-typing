@@ -1,13 +1,15 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
+const PUBLIC_PATH = process.env.PUBLIC_PATH || path.resolve(__dirname, 'dist');
+
 module.exports = {
   mode: 'development',
   entry: ['./src/index.tsx'],
   output: {
     filename: 'main.bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: path.resolve(__dirname, 'dist'),
+    publicPath: PUBLIC_PATH,
   },
   devServer: {
     contentBase: './dist',
