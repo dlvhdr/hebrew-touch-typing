@@ -13,7 +13,7 @@
 <strong><a href="typing.dlvhdr.me">typing.dlvhdr.me</a></strong> helps you learn
 touch typing in hebrew.
 
-<img src="./demo-text.gif" width="700px"></img>
+<img src="./demo.gif" width="700px"></img>
 
 ## About The Project
 
