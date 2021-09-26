@@ -24,22 +24,6 @@ finger positions and incrementally introducing more and more keys.
 Touch typing can dramatically improve your typing speed and free your mind from
 staring at the keyboard. With it, typing becomes more natural.
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <ul>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#testing">Testing</a></li>
-  </ul>
-</details>
-
 ### Built With
 
 - [React](https://www.reactjs.org)
