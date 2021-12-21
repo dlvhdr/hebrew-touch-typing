@@ -10,7 +10,7 @@
   </p>
 </p>
 
-<strong><a href="typing.dlvhdr.me">typing.dlvhdr.me</a></strong> helps you learn
+<strong><a href="https://typing.dlvhdr.me">typing.dlvhdr.me</a></strong> helps you learn
 touch typing in hebrew.
 
 <img src="./demo.gif" width="700px"></img>
