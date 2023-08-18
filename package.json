@@ -1,9 +1,9 @@
 {
-  "name": "personal-website",
-  "version": "1.0.0",
-  "description": "DLVHDR Personal Website",
+  "name": "hebrew-touch-typing",
+  "version": "1.0.1",
+  "description": "Hebrew Touch Typing",
   "main": "src/index.tsx",
-  "repository": "git@github.com:dlvhdr/personal-website.git",
+  "repository": "git@github.com:dlvhdr/hebrew-touch-typing.git",
   "author": "dolevc2@gmail.com",
   "license": "MIT",
   "scripts": {
