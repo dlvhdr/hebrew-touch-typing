@@ -1,4 +1,4 @@
-import {cleanup, screen} from '@testing-library/react';
+import {cleanup, screen, waitFor} from '@testing-library/react';
 import {getListOfTextExercises} from '../../../utils/generateLetterExercises';
 import {getDriver} from './HebrewTouchTyping.driver';
 
@@ -90,11 +90,20 @@ describe('text transform', () => {
     expect(screen.queryByText(/exercise complete!/i)).not.toBeInTheDocument();
 
     driver.when.textIsTyped('שורה 1 שורה 2');
+
+    await waitFor(() => {
+      expect(
+        screen.queryByTestId('exercise-completed-card'),
+      ).toBeInTheDocument();
+    });
+
     driver.when.exerciseIsSelected('3');
 
-    expect(
-      screen.queryByTestId('exercise-completed-card'),
-    ).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByTestId('exercise-completed-card'),
+      ).not.toBeInTheDocument();
+    });
   });
 
   it('should allow selecting a text exercise', async () => {

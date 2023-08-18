@@ -12,7 +12,9 @@ module.exports = {
     publicPath: PUBLIC_PATH,
   },
   devServer: {
-    contentBase: './dist',
+    static: {
+      directory: './dist',
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

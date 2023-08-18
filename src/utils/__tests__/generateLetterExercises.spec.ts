@@ -1,7 +1,7 @@
 import {getFullListOfPracticeAndReviewExercises} from '../generateLetterExercises';
 import {getDriver} from './generateLetterExercises.driver';
 describe('generateLetterExercises', () => {
-  it('should generate a consise text, using only the given two letters, for a review lesson', () => {
+  it('should generate a concise text, using only the given two letters, for a review lesson', () => {
     const driver = getDriver();
     driver.given.letters(['ג', 'ל']);
 

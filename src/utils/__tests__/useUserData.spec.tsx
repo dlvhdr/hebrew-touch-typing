@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {render, screen, waitFor} from '@testing-library/react';
 import {StoredExerciseData, useUserData} from '../useUserData';
 import userEvent from '@testing-library/user-event';
 
@@ -34,23 +34,27 @@ describe('useLocalStorage', () => {
     );
   });
 
-  it('should allow saving to local storage', () => {
+  it('should allow saving to local storage', async () => {
+    localStorage.clear();
     const dataToPersist = {
       exerciseIndex: 0,
-      wpmRecord: 50,
+      wpmRecord: 30,
     };
     render(<LocalStorageTester exerciseToPersist={dataToPersist} />);
 
     userEvent.click(screen.getByRole('button', {name: /persist/i}));
 
-    expect(localStorage.getItem('exercises')).toBe(
-      JSON.stringify({
-        0: dataToPersist,
-      }),
-    );
+    await waitFor(() => {
+      expect(localStorage.getItem('exercises')).toBe(
+        JSON.stringify({
+          0: dataToPersist,
+        }),
+      );
+    });
   });
 
   it('should allow fetching from local storage', async () => {
+    localStorage.clear();
     const dataToPersist = {
       exerciseIndex: 0,
       wpmRecord: 50,
