@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --config webpack.config.ts",
-    "dev": "webpack server --config webpack.config.ts",
+    "dev": "webpack serve --config webpack.config.ts",
+    "dev:docker": "webpack serve --config webpack.config.ts --host 0.0.0.0 --port 3000",
     "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch"
