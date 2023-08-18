@@ -90,6 +90,9 @@ describe('text transform', () => {
     expect(screen.queryByText(/exercise complete!/i)).not.toBeInTheDocument();
 
     driver.when.textIsTyped('שורה 1 שורה 2');
+
+    expect(screen.queryByTestId('exercise-completed-card')).toBeInTheDocument();
+
     driver.when.exerciseIsSelected('3');
 
     expect(

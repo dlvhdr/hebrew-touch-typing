@@ -10,7 +10,8 @@
     "build": "webpack --config webpack.config.ts",
     "dev": "webpack server --config webpack.config.ts",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
