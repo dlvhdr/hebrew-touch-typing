@@ -9,6 +9,7 @@ import HeroSection from '../HeroSection/HeroSection';
 import {useWPM} from '../../utils/useWPM';
 import {KeyboardSvg} from '../KeyboardSvg/KeyboardSvg';
 import {useUserDataContext} from '../UserDataProvider/UserDataProvider';
+import {normalizeGeresh} from '../../utils/normalizeGeresh';
 
 interface HebrewTouchTypingProps {
   className?: string;
@@ -57,7 +58,8 @@ const HebrewTouchTyping = ({
         return;
       }
 
-      setInputValue(newText);
+      const normalizedText = normalizeGeresh(newText);
+      setInputValue(normalizedText);
       if (newText.length === text.length) {
         onExerciseCompleted();
       }
