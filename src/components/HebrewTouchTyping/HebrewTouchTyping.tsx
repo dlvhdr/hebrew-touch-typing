@@ -38,6 +38,7 @@ const HebrewTouchTyping = ({
     setInputValue('');
     setIsExerciseComplete(false);
     resetWPM();
+    inputRef.current?.focus();
   }, [resetWPM, selectedExercise]);
 
   const onExerciseCompleted = useCallback(() => {
