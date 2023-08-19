@@ -21,8 +21,10 @@ export type HebrewTouchTypingDriver = {
     currentLetter: () => HTMLElement | null;
   };
 };
-export const getDriver = (): HebrewTouchTypingDriver => {
-  const initialExercise: LettersExercise = {
+export const getDriver = (
+  manualInitialExercise?: LettersExercise,
+): HebrewTouchTypingDriver => {
+  const initialExercise: LettersExercise = manualInitialExercise ?? {
     index: 0,
     type: ExerciseType.REVIEW,
     text: ['שורה 1 ', 'שורה 2'],

@@ -27,3 +27,6 @@ export const HEBREW_LETTERS = [
   'ש',
   'ת',
 ];
+
+export const WINDOWS_GERESH = "'";
+export const MAC_GERESH = '׳';
