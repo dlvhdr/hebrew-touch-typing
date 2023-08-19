@@ -1,5 +1,9 @@
 import {cleanup, screen, waitFor} from '@testing-library/react';
-import {getListOfTextExercises} from '../../../utils/generateLetterExercises';
+import {ExerciseType} from '../../../constants/practiceAndReviewLetterSets';
+import {
+  getListOfTextExercises,
+  LettersExercise,
+} from '../../../utils/generateLetterExercises';
 import {getDriver} from './HebrewTouchTyping.driver';
 
 let driver: ReturnType<typeof getDriver>;
@@ -72,6 +76,54 @@ describe('text transform', () => {
     expect(incorrectLetterelements).toHaveLength(1);
   });
 
+  it("should apply correct letter class when typing ' in exercise expecting ' (Windows default)", async () => {
+    const exercise: LettersExercise = {
+      index: 0,
+      type: ExerciseType.REVIEW,
+      text: ["'", 'ם'],
+      newLetters: ["'", 'ם'],
+    };
+
+    driver = getDriver(exercise);
+
+    driver.when.render();
+
+    driver.when.textIsTyped("'");
+
+    const letterElements = driver.get.statelessLetters();
+    expect(letterElements).toHaveLength(driver.get.textLength() - 2);
+
+    const correctLetterElements = await driver.get.correctLetters();
+    expect(correctLetterElements).toHaveLength(1);
+
+    const incorrectLetterElements = driver.get.incorrectLetters();
+    expect(incorrectLetterElements).toHaveLength(0);
+  });
+
+  it("should apply correct letter class when typing ׳ in exercise expecting ' (Mac default)", async () => {
+    const exercise: LettersExercise = {
+      index: 0,
+      type: ExerciseType.REVIEW,
+      text: ["'", 'ם'],
+      newLetters: ["'", 'ם'],
+    };
+
+    driver = getDriver(exercise);
+
+    driver.when.render();
+
+    driver.when.textIsTyped('׳');
+
+    const letterElements = driver.get.statelessLetters();
+    expect(letterElements).toHaveLength(driver.get.textLength() - 2);
+
+    const correctLetterElements = await driver.get.correctLetters();
+    expect(correctLetterElements).toHaveLength(1);
+
+    const incorrectLetterElements = driver.get.incorrectLetters();
+    expect(incorrectLetterElements).toHaveLength(0);
+  });
+
   it('should mark lesson as complete when all text has been typed', async () => {
     driver.when.render();
     expect(screen.queryByText(/exercise complete!/i)).not.toBeInTheDocument();
@@ -111,6 +163,7 @@ describe('text transform', () => {
     driver.when.render();
 
     driver.when.exerciseIsSelected(`${textExercises[0].index}`);
+
     expect(screen.getAllByText(textExercises[0].label)).toHaveLength(2);
   });
 });
