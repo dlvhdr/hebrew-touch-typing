@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-export const useStickyState = <T extends unknown>(
+export const useStickyState = <T,>(
   defaultValue: T,
   key: string,
 ): [T, (value: T) => void] => {

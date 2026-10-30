@@ -4,7 +4,7 @@ import {KeyboardWarriorSvg} from '../HebrewTouchTyping/KeyboardWarriorSvg';
 import * as styles from './hero-section.scss';
 import LeftArrow from './LeftArrow';
 
-const HeroSection = (): JSX.Element => {
+const HeroSection = (): React.JSX.Element => {
   const {setSelectedExerciseNumber} = useExerciseContext();
   return (
     <div className={styles.emptyState}>

@@ -11,7 +11,7 @@ export const renderWithProviders = (
   },
   renderOptions?: Omit<RenderOptions, 'wrapper'>,
 ): RenderResult => {
-  const CustomExerciseProvider: React.FC = ({children}): JSX.Element => {
+  const CustomExerciseProvider: React.FC<React.PropsWithChildren> = ({children}): React.JSX.Element => {
     return (
       <ExerciseProvider initialExercise={initialExercise}>
         <UserDataProvider>{children}</UserDataProvider>

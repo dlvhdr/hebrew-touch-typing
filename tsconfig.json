@@ -3,6 +3,8 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "allowJs": false,
     "jsx": "react",
     "outDir": "./dist",

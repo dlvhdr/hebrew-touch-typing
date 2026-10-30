@@ -42,7 +42,7 @@ describe('useLocalStorage', () => {
     };
     render(<LocalStorageTester exerciseToPersist={dataToPersist} />);
 
-    userEvent.click(screen.getByRole('button', {name: /persist/i}));
+    await userEvent.click(screen.getByRole('button', {name: /persist/i}));
 
     await waitFor(() => {
       expect(localStorage.getItem('exercises')).toBe(
@@ -60,7 +60,7 @@ describe('useLocalStorage', () => {
       wpmRecord: 50,
     };
     render(<LocalStorageTester exerciseToPersist={dataToPersist} />);
-    userEvent.click(screen.getByRole('button', {name: /persist/i}));
+    await userEvent.click(screen.getByRole('button', {name: /persist/i}));
 
     expect(await screen.findByTestId('container')).toHaveTextContent(
       JSON.stringify({

@@ -13,7 +13,7 @@ interface ExerciseTitleProps {
   className?: string;
 }
 
-const ExerciseTitle = ({className}: ExerciseTitleProps): JSX.Element | null => {
+const ExerciseTitle = ({className}: ExerciseTitleProps): React.JSX.Element | null => {
   const {selectedExercise} = useExerciseContext();
   if (selectedExercise == null) {
     return null;

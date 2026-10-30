@@ -1,7 +1,7 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-const PUBLIC_PATH = process.env.PUBLIC_PATH || path.resolve(__dirname, 'dist');
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
 
 module.exports = {
   mode: 'development',
@@ -12,6 +12,7 @@ module.exports = {
     publicPath: PUBLIC_PATH,
   },
   devServer: {
+    port: 8080,
     static: {
       directory: './dist',
     },
@@ -50,6 +51,7 @@ module.exports = {
             options: {
               modules: {
                 namedExport: true,
+                exportLocalsConvention: 'camel-case-only',
               },
             },
           },

@@ -22,7 +22,7 @@ interface ExerciseProviderProps {
 const ExerciseProvider = ({
   children,
   initialExercise = null,
-}: ExerciseProviderProps): JSX.Element => {
+}: ExerciseProviderProps): React.JSX.Element => {
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(
     initialExercise,
   );

@@ -6,7 +6,7 @@ interface KeyboardSvgProps {
   currentLetter: string;
 }
 
-export const KeyboardSvg = ({currentLetter}: KeyboardSvgProps): JSX.Element => {
+export const KeyboardSvg = ({currentLetter}: KeyboardSvgProps): React.JSX.Element => {
   const keyboardRef = useRef<SVGSVGElement | null>(null);
 
   const markFingersAsInactive = (svgElement: SVGElement) => {
