@@ -11,7 +11,7 @@ interface UserDataProviderProps {
   children: React.ReactNode;
 }
 
-const UserDataProvider = ({children}: UserDataProviderProps): JSX.Element => {
+const UserDataProvider = ({children}: UserDataProviderProps): React.JSX.Element => {
   const value = useUserData();
   return (
     <UserDataContext.Provider value={value}>

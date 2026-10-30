@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LeftArrow = (): JSX.Element => {
+const LeftArrow = (): React.JSX.Element => {
   return (
     <svg
       width="27"

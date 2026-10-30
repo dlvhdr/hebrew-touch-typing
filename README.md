@@ -64,3 +64,15 @@ To run the tests simply run:
 ```sh
 npm test
 ```
+
+## Development tooling
+
+Use Node.js 22.18 or newer. Start the development server with `npm run dev`.
+Run `npm run typecheck`, `npm run lint`, and `npm run build` for the remaining
+checks.
+
+TypeScript 7 is installed as `typescript-compiler` and used by
+`npm run typecheck`. ESLint's TypeScript parser and ts-node resolve their own
+supported TypeScript 6 API dependency; TypeScript 7 no longer provides that API.
+React linting uses `@eslint-react/eslint-plugin` because `eslint-plugin-react`
+does not support ESLint 10.

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const CheckmarkSvg = (): JSX.Element => {
+export const CheckmarkSvg = (): React.JSX.Element => {
   return (
     <svg
       width="66"

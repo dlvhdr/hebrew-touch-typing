@@ -11,7 +11,7 @@ export type HebrewTouchTypingDriver = {
   when: {
     render: () => Element;
     textIsTyped: (text: string) => void;
-    exerciseIsSelected: (exerciseNumberLabel: string) => void;
+    exerciseIsSelected: (exerciseNumberLabel: string) => Promise<void>;
   };
   get: {
     textLength: () => number;
@@ -50,8 +50,8 @@ export const getDriver = (
           target: {value: text},
         });
       },
-      exerciseIsSelected: (exerciseNumberLabel: string) => {
-        userEvent.click(
+      exerciseIsSelected: async (exerciseNumberLabel: string) => {
+        await userEvent.click(
           screen.getByTestId(`exercise-number-pill-${exerciseNumberLabel}`),
         );
       },

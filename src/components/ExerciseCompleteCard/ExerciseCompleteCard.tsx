@@ -13,7 +13,7 @@ const ExerciseComponentCard = ({
   wpm,
   inputText,
   exerciseText,
-}: ExerciseCompleteCardProps): JSX.Element => {
+}: ExerciseCompleteCardProps): React.JSX.Element => {
   const percent =
     (getNumOfCorrectCharacters(inputText, exerciseText) / exerciseText.length) *
     100;

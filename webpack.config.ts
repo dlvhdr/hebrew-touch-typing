@@ -1,17 +1,21 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import {fileURLToPath} from 'node:url';
 
-const PUBLIC_PATH = process.env.PUBLIC_PATH || path.resolve(__dirname, 'dist');
+const projectDirectory = path.dirname(fileURLToPath(import.meta.url));
 
-module.exports = {
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
+
+export default {
   mode: 'development',
   entry: ['./src/index.tsx'],
   output: {
     filename: 'main.bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(projectDirectory, 'dist'),
     publicPath: PUBLIC_PATH,
   },
   devServer: {
+    port: 8080,
     static: {
       directory: './dist',
     },
@@ -50,6 +54,7 @@ module.exports = {
             options: {
               modules: {
                 namedExport: true,
+                exportLocalsConvention: 'camel-case-only',
               },
             },
           },

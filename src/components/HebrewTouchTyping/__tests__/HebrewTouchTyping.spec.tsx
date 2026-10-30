@@ -1,4 +1,4 @@
-import {cleanup, screen, waitFor} from '@testing-library/react';
+import {screen, waitFor} from '@testing-library/react';
 import {ExerciseType} from '../../../constants/practiceAndReviewLetterSets';
 import {
   getListOfTextExercises,
@@ -10,7 +10,6 @@ let driver: ReturnType<typeof getDriver>;
 
 describe('text transform', () => {
   beforeEach(() => (driver = getDriver()));
-  afterEach(cleanup);
 
   it('should render all the lines', () => {
     driver.when.render();
@@ -31,7 +30,7 @@ describe('text transform', () => {
     driver.when.render();
 
     driver.when.textIsTyped('שורה');
-    driver.when.exerciseIsSelected('3');
+    await driver.when.exerciseIsSelected('3');
 
     const correctLetterElements = await driver.get
       .correctLetters()
@@ -145,11 +144,11 @@ describe('text transform', () => {
 
     await waitFor(() => {
       expect(
-        screen.queryByTestId('exercise-completed-card'),
+        screen.getByTestId('exercise-completed-card'),
       ).toBeInTheDocument();
     });
 
-    driver.when.exerciseIsSelected('3');
+    await driver.when.exerciseIsSelected('3');
 
     await waitFor(() => {
       expect(
@@ -162,7 +161,7 @@ describe('text transform', () => {
     const textExercises = getListOfTextExercises();
     driver.when.render();
 
-    driver.when.exerciseIsSelected(`${textExercises[0].index}`);
+    await driver.when.exerciseIsSelected(`${textExercises[0].index}`);
 
     expect(screen.getAllByText(textExercises[0].label)).toHaveLength(2);
   });

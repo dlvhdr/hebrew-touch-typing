@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "target": "es2015",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "allowJs": false,
     "jsx": "react",
     "outDir": "./dist",

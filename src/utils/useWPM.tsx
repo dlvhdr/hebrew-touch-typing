@@ -16,7 +16,7 @@ interface WPMHook {
 
 export const useWPM = (input: string, text: string): WPMHook => {
   const [wpm, setWPM] = useState(0);
-  const startTimeRef = useRef<number | null>();
+  const startTimeRef = useRef<number | null>(null);
   const isFinished = useMemo(
     () => input.length === text.length,
     [input.length, text.length],
