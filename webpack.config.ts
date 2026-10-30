@@ -1,14 +1,17 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import {fileURLToPath} from 'node:url';
+
+const projectDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
 
-module.exports = {
+export default {
   mode: 'development',
   entry: ['./src/index.tsx'],
   output: {
     filename: 'main.bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(projectDirectory, 'dist'),
     publicPath: PUBLIC_PATH,
   },
   devServer: {

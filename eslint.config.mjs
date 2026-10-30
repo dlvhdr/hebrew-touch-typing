@@ -1,13 +1,13 @@
-const js = require('@eslint/js');
-const tsParser = require('@typescript-eslint/parser');
-const tsPlugin = require('@typescript-eslint/eslint-plugin');
-const react = require('eslint-plugin-react');
-const hooks = require('eslint-plugin-react-hooks');
-const testingLibrary = require('eslint-plugin-testing-library');
-const unusedImports = require('eslint-plugin-unused-imports');
-const prettier = require('eslint-config-prettier');
+import js from '@eslint/js';
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import react from '@eslint-react/eslint-plugin';
+import hooks from 'eslint-plugin-react-hooks';
+import testingLibrary from 'eslint-plugin-testing-library';
+import unusedImports from 'eslint-plugin-unused-imports';
+import prettier from 'eslint-config-prettier';
 
-module.exports = [
+export default [
   {ignores: ['dist/**', 'node_modules/**']},
   {
     files: ['**/*.{ts,tsx}'],
@@ -39,13 +39,18 @@ module.exports = [
     settings: {react: {version: 'detect'}},
     plugins: {
       '@typescript-eslint': tsPlugin,
-      react,
+      '@eslint-react': react,
       'react-hooks': hooks,
       'unused-imports': unusedImports,
     },
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
+      // Keep existing component patterns; these migration suggestions are unrelated to lint compatibility.
+      '@eslint-react/no-context-provider': 'off',
+      '@eslint-react/no-use-context': 'off',
+      '@eslint-react/naming-convention-ref-name': 'off',
+      '@eslint-react/set-state-in-effect': 'off',
       ...tsPlugin.configs.recommended.rules,
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
